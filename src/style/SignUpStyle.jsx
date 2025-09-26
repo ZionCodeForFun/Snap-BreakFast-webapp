@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  max-width: 100%;
+  width: 100%;
   height: 100vh;
   background-color: grey;
   display: flex;
@@ -10,19 +10,20 @@ export const Container = styled.div`
 
   .wrapper {
     position: relative;
-    width: 27%;
-    height: max-content;
-    background-color: #ffffff;
+    width: 30%;
+    min-height: max-content;
+    background-color: white;
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
     border-radius: 1rem;
-    padding: 3rem 0;
+    padding: 1rem 0;
+    color: #131313;
 
     input {
       width: 80%;
       align-self: center;
-      padding: 0.5rem 0;
+      padding: 0.7rem 0;
       border-radius: 0.4rem;
       outline: none;
       border: none;
@@ -34,11 +35,22 @@ export const Container = styled.div`
     label {
       width: 80%;
       align-self: center;
+      padding: 0.4rem 0;
+      font-size: 1.2rem;
     }
 
     .signup_text {
       align-self: center;
       text-align: center;
+      align-self: center;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-weight: 100;
+      p {
+        font-size: 1.2rem;
+      }
     }
 
     .fullname_holder {
@@ -55,8 +67,8 @@ export const Container = styled.div`
 
     h3 {
       align-self: center;
-      font-weight: 100;
-      font-size: 0.9rem;
+      font-weight: 600;
+      font-size: 1rem;
 
       span {
         color: #297e2a;
@@ -79,7 +91,7 @@ export const Container = styled.div`
         display: flex;
         align-items: center;
         gap: 0.2rem;
-        cursor: pointer;
+
         padding: 0 0.5rem;
       }
 
@@ -93,13 +105,12 @@ export const Container = styled.div`
       }
     }
 
-  
     .dropdown {
       position: absolute;
       top: 70%;
       left: 10%;
       width: 80%;
-      max-height: 200px;
+      max-height: 15vh;
       background: #fff;
       border-radius: 0.5rem;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -112,7 +123,7 @@ export const Container = styled.div`
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      cursor: pointer;
+
       transition: background 0.2s ease;
 
       &:hover {
@@ -123,7 +134,7 @@ export const Container = styled.div`
     .next_btn {
       width: 80%;
       align-self: center;
-      padding: 0.5rem 0;
+      padding: 0.7rem 0;
       border-radius: 0.4rem;
       margin-top: 1rem;
       border: none;
@@ -142,7 +153,6 @@ export const Container = styled.div`
       right: 8%;
       font-family: Arial, Helvetica, sans-serif;
       cursor: pointer;
-      
     }
   }
 `;

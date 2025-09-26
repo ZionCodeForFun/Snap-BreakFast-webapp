@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { Container } from "./SignUpStyle";
+import { Container } from "../style/SignUpStyle";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { IoClose } from "react-icons/io5";
 import ReactCountryFlag from "react-country-flag";
-import Button from "../components/Button";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const SignUp = () => {
+import { SignUpUser } from "../api/auth";
+
+const SignUp = ({ setUser, goToLogin, goToVerify }) => {
   const CountryFlag = [
     {
       flag: (
@@ -79,96 +80,6 @@ const SignUp = () => {
       ),
       code: "+226",
     },
-    {
-      flag: (
-        <ReactCountryFlag
-          countryCode="cf"
-          svg
-          style={{ width: "1em", height: "1em", borderRadius: "0.1rem" }}
-        />
-      ),
-      code: "+236",
-    },
-    {
-      flag: (
-        <ReactCountryFlag
-          countryCode="za"
-          svg
-          style={{ width: "1em", height: "1em", borderRadius: "0.1rem" }}
-        />
-      ),
-      code: "+27",
-    },
-    {
-      flag: (
-        <ReactCountryFlag
-          countryCode="tz"
-          svg
-          style={{ width: "1em", height: "1em", borderRadius: "0.1rem" }}
-        />
-      ),
-      code: "+255",
-    },
-    {
-      flag: (
-        <ReactCountryFlag
-          countryCode="tg"
-          svg
-          style={{ width: "1em", height: "1em", borderRadius: "0.1rem" }}
-        />
-      ),
-      code: "+228",
-    },
-    {
-      flag: (
-        <ReactCountryFlag
-          countryCode="tn"
-          svg
-          style={{ width: "1em", height: "1em", borderRadius: "0.1rem" }}
-        />
-      ),
-      code: "+216",
-    },
-    {
-      flag: (
-        <ReactCountryFlag
-          countryCode="zw"
-          svg
-          style={{ width: "1em", height: "1em", borderRadius: "0.1rem" }}
-        />
-      ),
-      code: "+263",
-    },
-    {
-      flag: (
-        <ReactCountryFlag
-          countryCode="cv"
-          svg
-          style={{ width: "1em", height: "1em", borderRadius: "0.1rem" }}
-        />
-      ),
-      code: "+238",
-    },
-    {
-      flag: (
-        <ReactCountryFlag
-          countryCode="cm"
-          svg
-          style={{ width: "1em", height: "1em", borderRadius: "0.1rem" }}
-        />
-      ),
-      code: "+237",
-    },
-    {
-      flag: (
-        <ReactCountryFlag
-          countryCode="cg"
-          svg
-          style={{ width: "1em", height: "1em", borderRadius: "0.1rem" }}
-        />
-      ),
-      code: "+242",
-    },
   ];
 
   const [selectedCountry, setSelectedCountry] = useState(CountryFlag[0]);
@@ -180,6 +91,7 @@ const SignUp = () => {
     phone: "",
     refer: "",
   });
+
   const HandleSubmit = async (e) => {
     e.preventDefault();
 
@@ -200,20 +112,10 @@ const SignUp = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:5000/api/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) {
-        throw new Error("Something went wrong!");
-      }
-
-      const data = await res.json();
-      console.log("Response:", data);
+      const { data } = await SignUpUser(payload);
 
       toast.success("Signup successful!");
+      setUser(data.user);
 
       setValue({
         firstName: "",
@@ -222,36 +124,34 @@ const SignUp = () => {
         phone: "",
         refer: "",
       });
+
+      goToVerify();
     } catch (error) {
-      toast.error(error.message || "Failed to signup!");
+      toast.error(
+        error.response?.data?.message || error.message || "Failed to signup!"
+      );
     }
   };
 
-  const OnChangefirstname = (e) => {
-    setValue((prev) => ({ ...prev, firstName: e.target.value }));
+  const handleChange = (field) => (e) => {
+    setValue((prev) => ({ ...prev, [field]: e.target.value }));
   };
-  const OnChangelastname = (e) => {
-    setValue((prev) => ({ ...prev, lastName: e.target.value }));
-  };
-  const OnChangeEmail = (e) => {
-    e.target.value;
-    setValue((prev) => ({ ...prev, email: e.target.value }));
-  };
+
   const OnChangePhone = (e) => {
-    e.target.value;
-    setValue((prev) => ({ ...prev, phone: e.target.value }));
+    let input = e.target.value;
+    if (!/^\d*$/.test(input)) {
+      toast.error("Phone number must be digits only!");
+      return;
+    }
+    if (input.startsWith("0")) input = input.slice(1);
+    setValue((prev) => ({ ...prev, phone: input }));
   };
-  const OnChangeReffer = (e) => {
-    e.target.value;
-    setValue((prev) => ({ ...prev, refer: e.target.value }));
-  };
-  console.log(value);
 
   return (
     <Container>
       <form onSubmit={HandleSubmit} className="wrapper">
         <div className="signup_text">
-          <h2>Sign Up</h2>
+          <h1>Sign Up</h1>
           <p>Sign up to continue</p>
         </div>
 
@@ -261,39 +161,43 @@ const SignUp = () => {
             <input
               type="text"
               value={value.firstName}
-              onChange={OnChangefirstname}
+              onChange={handleChange("firstName")}
             />
           </div>
           <div className="name_holder">
             <label>Last Name</label>
             <input
-              value={value.lastName}
-              onChange={OnChangelastname}
               type="text"
+              value={value.lastName}
+              onChange={handleChange("lastName")}
             />
           </div>
         </div>
 
         <label>Email Address</label>
         <input
-          value={value.email}
-          onChange={OnChangeEmail}
           type="text"
+          value={value.email}
+          onChange={handleChange("email")}
           placeholder="your email here"
         />
 
         <label>Phone number</label>
         <div className="country">
-          <div className="icon_holder" onClick={() => setOpen(!open)}>
+          <div className="icon_holder">
             {selectedCountry.flag}
-            <RiArrowDropDownLine />
+            <RiArrowDropDownLine
+              onClick={() => setOpen(!open)}
+              style={{ cursor: "pointer" }}
+            />
+            <hr style={{ border: "1px solid grey", height: "1.5rem" }} />
+            <span>{selectedCountry.code}</span>
           </div>
-          <hr />
           <input
             type="text"
             value={value.phone}
             onChange={OnChangePhone}
-            placeholder={selectedCountry.code}
+            placeholder="8166288535"
             style={{ paddingLeft: "0" }}
           />
         </div>
@@ -316,11 +220,18 @@ const SignUp = () => {
         )}
 
         <label>Referral code (optional)</label>
-        <input value={value.refer} onChange={OnChangeReffer} type="text" />
+        <input
+          type="text"
+          value={value.refer}
+          onChange={handleChange("refer")}
+        />
 
-        <button className="next_btn">Next</button>
+        <button type="submit" className="next_btn">
+          Next
+        </button>
+
         <h3>
-          Have an account? <span>Sign In</span>
+          Have an account? <span onClick={goToLogin}>Sign In</span>
         </h3>
 
         <IoClose className="close_btn" />
