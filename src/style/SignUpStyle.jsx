@@ -2,97 +2,90 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 100vh;
-  background-color: grey;
+  min-height: 100vh;
+  background-color: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 
   .wrapper {
     position: relative;
-    width: 30%;
-    min-height: max-content;
+    width: 100%;
+    max-width: 420px;
     background-color: white;
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.8rem;
     border-radius: 1rem;
-    padding: 1rem 0;
+    padding: 2rem 1rem;
     color: #131313;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
     input {
-      width: 80%;
-      align-self: center;
-      padding: 0.7rem 0;
+      width: 100%;
+      padding: 0.7rem 1rem;
       border-radius: 0.4rem;
       outline: none;
       border: none;
-      padding-left: 1rem;
       font-style: italic;
       background-color: #f2f6f5;
     }
 
     label {
-      width: 80%;
-      align-self: center;
-      padding: 0.4rem 0;
-      font-size: 1.2rem;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
     }
 
     .signup_text {
-      align-self: center;
-      text-align: center;
-      align-self: center;
       text-align: center;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      font-weight: 100;
+      gap: 0.8rem;
+      font-weight: 300;
       p {
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
     }
 
     .fullname_holder {
       display: flex;
-      width: 90%;
-      align-self: center;
-
+      gap: 0.5rem;
+      width: 100%;
       .name_holder {
+        flex: 1;
         display: flex;
         flex-direction: column;
-        width: 50%;
       }
     }
 
     h3 {
       align-self: center;
-      font-weight: 600;
-      font-size: 1rem;
+      font-weight: 500;
+      font-size: 0.95rem;
 
       span {
         color: #297e2a;
-        font-size: larger;
+        font-size: 1.05rem;
+        font-weight: 600;
         cursor: pointer;
       }
     }
 
     .country {
-      width: 80%;
-      align-self: center;
       display: flex;
       align-items: center;
       background-color: #f2f6f5;
-      padding-left: 0.5rem;
       border-radius: 0.6rem;
+      padding: 0.5rem;
       position: relative;
 
       .icon_holder {
         display: flex;
         align-items: center;
-        gap: 0.2rem;
-
-        padding: 0 0.5rem;
+        gap: 0.4rem;
+        padding: 0 0.3rem;
       }
 
       input {
@@ -107,10 +100,10 @@ export const Container = styled.div`
 
     .dropdown {
       position: absolute;
-      top: 70%;
-      left: 10%;
-      width: 80%;
-      max-height: 15vh;
+      top: calc(100% + 0.4rem);
+      left: 0;
+      width: 100%;
+      max-height: 160px;
       background: #fff;
       border-radius: 0.5rem;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -123,7 +116,6 @@ export const Container = styled.div`
       display: flex;
       align-items: center;
       gap: 0.5rem;
-
       transition: background 0.2s ease;
 
       &:hover {
@@ -132,27 +124,53 @@ export const Container = styled.div`
     }
 
     .next_btn {
-      width: 80%;
-      align-self: center;
-      padding: 0.7rem 0;
-      border-radius: 0.4rem;
+      width: 100%;
+      padding: 0.9rem 0;
+      border-radius: 0.5rem;
       margin-top: 1rem;
       border: none;
       background-color: #297e2a;
+      font-size: 1rem;
+      font-weight: 500;
       color: white;
       cursor: pointer;
+      &:hover {
+        background-color: #175018;
+      }
     }
 
     .close_btn {
-      font-size: 3rem;
-      padding: 0.5rem;
+      font-size: 1.8rem;
+      padding: 0.3rem;
       border: none;
       background: none;
       position: absolute;
-      top: 4%;
-      right: 8%;
-      font-family: Arial, Helvetica, sans-serif;
+      top: 1rem;
+      right: 1rem;
       cursor: pointer;
+      border-radius: 50%;
+      border: 1px solid #131313;
+      transition: background 0.2s ease;
+      &:hover {
+        background-color: #eee3d5;
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    .wrapper {
+      padding: 1.5rem;
+      gap: 0.6rem;
+
+      label {
+        font-size: 0.9rem;
+      }
+      .signup_text p {
+        font-size: 0.9rem;
+      }
+      .next_btn {
+        font-size: 0.9rem;
+      }
     }
   }
 `;

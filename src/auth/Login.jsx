@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Container } from "../style/LoginStyle";
 import { loginUser } from "../api/auth";
 
-const Login = ({ setUser, setStep, goToSignup }) => {
+const Login = ({ setUser, setStep, goToSignup, setShowModal }) => {
   const [email, setEmail] = useState("");
 
   const handleChangeEmail = (e) => {
@@ -19,19 +19,19 @@ const Login = ({ setUser, setStep, goToSignup }) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) return toast.error("Enter a valid email!");
 
-    try {
-      const data = await loginUser({ email });
-      toast.success("Login successful!");
-      setUser(data.user);
-      setStep("verify");
-    } catch (error) {
-      toast.error(error.message || "Login failed!");
-    }
-  };
+     try {
+       const data = await loginUser({ email });
+       toast.success("Login successful!");
+       setUser(data.user);
+       setStep("verify");
+     } catch (error) {
+       toast.error(error.message || "Login failed!");
+     }
+   };
 
   return (
     <Container>
-      <form className="wrapper" onSubmit={handleSubmit}>
+      <form className="wrapper  animate__animated  animate__bounceIn" onSubmit={handleSubmit}>
         <div className="signin_text">
           <h1>Sign in</h1>
           <p>Sign in to continue</p>
@@ -53,7 +53,11 @@ const Login = ({ setUser, setStep, goToSignup }) => {
           Don’t have an account? <span onClick={goToSignup}>Sign Up</span>
         </h3>
 
-        <IoClose className="close_btn" />
+        <IoClose
+          className="close_btn"
+          style={{ cursor: "pointer" }}
+          onClick={() => setShowModal(false)}
+        />
         <ToastContainer position="top-center" autoClose={3000} />
       </form>
     </Container>

@@ -5,7 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { IoClose } from "react-icons/io5";
 import { verifyEmailOTP } from "../api/auth";
 
-const VerifyEmail = ({ user, onVerified }) => {
+const VerifyEmail = ({ user, onVerified, setShowModal }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const inputsRef = useRef([]);
 
@@ -36,17 +36,19 @@ const VerifyEmail = ({ user, onVerified }) => {
 
     try {
       const code = otp.join("");
-      const data = await verifyEmailOTP(user.email, code);
+      const data = await verifyEmailOTP( code);
       toast.success("Email verified successfully!");
       if (onVerified) onVerified(data.user);
     } catch (error) {
       toast.error(error.response?.data?.message || "Verification failed!");
     }
+    console.log("Submitting:", { email: user.email, otp: code });
   };
+
 
   return (
     <Container>
-      <form onSubmit={handleSubmit} className="wrapper">
+      <form onSubmit={handleSubmit} className="wrapper animate__animated  animate__bounceIn">
         <h2>Verify Email Address</h2>
         <p>
           {" "}
@@ -72,7 +74,11 @@ const VerifyEmail = ({ user, onVerified }) => {
         <p className="goBack">
           Didn't receive the code? Resend code in <span> 1:59</span>
         </p>
-        <IoClose className="close_btn" style={{ cursor: "pointer" }} />
+        <IoClose
+          className="close_btn"
+          style={{ cursor: "pointer" }}
+          onClick={() => setShowModal(false)}
+        />
         <ToastContainer position="top-center" autoClose={3000} />
       </form>
     </Container>

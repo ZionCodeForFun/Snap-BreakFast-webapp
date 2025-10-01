@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { SignUpUser } from "../api/auth";
 
-const SignUp = ({ setUser, goToLogin, goToVerify }) => {
+const SignUp = ({ setUser, goToLogin, goToVerify, setShowModal }) => {
   const CountryFlag = [
     {
       flag: (
@@ -88,14 +88,14 @@ const SignUp = ({ setUser, goToLogin, goToVerify }) => {
     firstName: "",
     lastName: "",
     email: "",
-    phone: "",
+    phoneNumber: "",
     refer: "",
   });
 
   const HandleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!value.firstName || !value.lastName || !value.email || !value.phone) {
+    if (!value.firstName || !value.lastName || !value.email || !value.phoneNumber) {
       toast.error("All required fields must be filled!");
       return;
     }
@@ -121,7 +121,7 @@ const SignUp = ({ setUser, goToLogin, goToVerify }) => {
         firstName: "",
         lastName: "",
         email: "",
-        phone: "",
+        phoneNumber: "",
         refer: "",
       });
 
@@ -131,7 +131,7 @@ const SignUp = ({ setUser, goToLogin, goToVerify }) => {
         error.response?.data?.message || error.message || "Failed to signup!"
       );
     }
-  };
+   };
 
   const handleChange = (field) => (e) => {
     setValue((prev) => ({ ...prev, [field]: e.target.value }));
@@ -144,12 +144,12 @@ const SignUp = ({ setUser, goToLogin, goToVerify }) => {
       return;
     }
     if (input.startsWith("0")) input = input.slice(1);
-    setValue((prev) => ({ ...prev, phone: input }));
+    setValue((prev) => ({ ...prev, phoneNumber: input }));
   };
 
   return (
-    <Container>
-      <form onSubmit={HandleSubmit} className="wrapper">
+    <Container >
+      <form onSubmit={HandleSubmit} className="wrapper animate__animated  animate__bounceIn">
         <div className="signup_text">
           <h1>Sign Up</h1>
           <p>Sign up to continue</p>
@@ -195,7 +195,7 @@ const SignUp = ({ setUser, goToLogin, goToVerify }) => {
           </div>
           <input
             type="text"
-            value={value.phone}
+            value={value.phoneNumber}
             onChange={OnChangePhone}
             placeholder="8166288535"
             style={{ paddingLeft: "0" }}
@@ -234,7 +234,11 @@ const SignUp = ({ setUser, goToLogin, goToVerify }) => {
           Have an account? <span onClick={goToLogin}>Sign In</span>
         </h3>
 
-        <IoClose className="close_btn" />
+        <IoClose
+          className="close_btn"
+          style={{ cursor: "pointer" }}
+          onClick={() => setShowModal(false)}
+        />
         <ToastContainer position="top-center" autoClose={3000} />
       </form>
     </Container>
