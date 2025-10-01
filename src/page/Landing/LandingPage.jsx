@@ -1,8 +1,8 @@
 import ServicesSection from "../../components/ServicesSection";
 import CarouselSection from "../../components/CarouselSection";
 import { Container, Main_holder } from "../../style/LandingPageStyle";
-import FAQ from '../../components/FAQ'
 import ProductDetails from "../../components/pop/ProductDetails";
+import FreqentFAQ from "../../components/FreqentFAQ";
 
 const LandingPage = ({ onLocationInputClick, onLiveLocation }) => {
   return (
@@ -11,11 +11,10 @@ const LandingPage = ({ onLocationInputClick, onLiveLocation }) => {
         <CarouselSection
           onLocationInputClick={onLocationInputClick}
           onLiveLocation={onLiveLocation}
-         
         />
         <ServicesSection />
-        <FAQ />
-        <ProductDetails/>
+        <FreqentFAQ />
+        <ProductDetails />
       </Main_holder>
     </Container>
   );
