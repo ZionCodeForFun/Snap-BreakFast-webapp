@@ -6,7 +6,7 @@ import food4 from "../assets/food4.jpg";
 import food12 from "../assets/food12.jpg";
 import food13 from "../assets/food13.jpg";
 import food14 from "../assets/food14.jpg";
-import Faq from "./FAQ";
+
 const ServicesSection = () => {
   return (
     <Container>
