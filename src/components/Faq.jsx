@@ -37,7 +37,7 @@ const faqData = [
   },
 ];
 
-const Faq = () => {
+const FAQ = () => {
   const [openIndexes, setOpenIndexes] = useState([]);
 
   const handleToggle = (idx) => {
@@ -129,4 +129,4 @@ const Faq = () => {
   );
 };
 
-export default Faq;
+export default FAQ;
