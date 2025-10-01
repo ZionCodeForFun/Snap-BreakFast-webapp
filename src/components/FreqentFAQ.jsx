@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Container } from "../style/FAQstyle";
 import { IoIosArrowDown } from "react-icons/io";
-import sec from "../assets/sec.png";
 
 const faqData = [
   {
     question: "What is SnapBreakfast?",
     answer:
-      "SnapBreakfast is a breakfast-focused delivery service that brings fresh , healthy  and affordable meals to your doorstep—designed especially for busy professionals and remote workers ",
+      "SnapBreakfast is a breakfast-focused delivery service that brings fresh , healthy  and affordable meals to your doorstep designed especially for busy professionals and remote workers ",
   },
   {
     question: "What kind of meals can I order?",
@@ -37,7 +36,7 @@ const faqData = [
   },
 ];
 
-const FAQ = () => {
+const FreqentFAQ = () => {
   const [openIndexes, setOpenIndexes] = useState([]);
 
   const handleToggle = (idx) => {
@@ -129,4 +128,4 @@ const FAQ = () => {
   );
 };
 
-export default FAQ;
+export default FreqentFAQ;

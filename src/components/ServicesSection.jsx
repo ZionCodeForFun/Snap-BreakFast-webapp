@@ -108,7 +108,7 @@ const ServicesSection = () => {
               <img src={food13} alt="" />
             </div>
           </div>
-          <div></div>
+       
         </div>
       </article>
     </Container>
