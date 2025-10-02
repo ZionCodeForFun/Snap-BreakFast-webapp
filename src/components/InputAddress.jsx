@@ -2,23 +2,23 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { IoSearchOutline } from "react-icons/io5";
 
-const InputAdress = ({ user }) => {
+const InputAddress = ({ user }) => {
   return (
     <div>
       <article>
         {user ? (
           <IconContainer>
-          <SearchIcon />
-        </IconContainer>
-      ) : (
-            <p></p>
+            <SearchIcon />
+          </IconContainer>
+        ) : (
+          <p></p>
         )}
       </article>
     </div>
   );
 };
 
-export default InputAdress;
+export default InputAddress;
 
 export const SearchContainer = styled.div`
   position: relative;
