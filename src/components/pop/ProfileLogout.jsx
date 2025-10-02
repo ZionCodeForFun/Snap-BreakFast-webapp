@@ -68,7 +68,7 @@ export default ProfileLogout;
 const OrderContainer = styled.div`
   position: fixed;
   top: 0%;
-  right: 0;
+  right: 0%;
   min-width: 450px;
   min-height: 100vh;
   background: #fff;
@@ -76,7 +76,7 @@ const OrderContainer = styled.div`
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   padding: 1rem;
-  z-index: 10000;
+  z-index:99999;
   .header {
     display: flex;
     flex-direction: column;

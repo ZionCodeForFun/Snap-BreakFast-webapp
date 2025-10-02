@@ -13,80 +13,80 @@ const restaurantList = [
   "Nosh N Nibble",
 ];
 
-function RestaurantSearch() {
-  const [query, setQuery] = React.useState("");
-  const [results, setResults] = React.useState([]);
+// function RestaurantSearch() {
+//   const [query, setQuery] = React.useState("");
+//   const [results, setResults] = React.useState([]);
 
-  React.useEffect(() => {
-    if (query.trim() === "") {
-      setResults([]);
-      return;
-    }
-    setResults(
-      restaurantList.filter((r) =>
-        r.toLowerCase().includes(query.trim().toLowerCase())
-      )
-    );
-  }, [query]);
+//   React.useEffect(() => {
+//     if (query.trim() === "") {
+//       setResults([]);
+//       return;
+//     }
+//     setResults(
+//       restaurantList.filter((r) =>
+//         r.toLowerCase().includes(query.trim().toLowerCase())
+//       )
+//     );
+//   }, [query]);
 
-  return (
-    <div style={{ minWidth: 250 }}>
-      <input
-        type="text"
-        placeholder="Search restaurants..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        style={{
-          padding: "0.7rem 1rem",
-          borderRadius: "0.5rem",
-          border: "none",
-          outline:"none",
-          fontSize: "1rem",
-          width: "100%",
-          position: "absolute",
-          top:0,
-          marginBottom:"2rem",
+  // return (
+    // <div style={{ minWidth: 250 }}>
+    //   <input
+    //     type="text"
+    //     placeholder="Search restaurants..."
+    //     value={query}
+    //     onChange={(e) => setQuery(e.target.value)}
+    //     style={{
+    //       padding: "0.7rem 1rem",
+    //       borderRadius: "0.5rem",
+    //       border: "none",
+    //       outline:"none",
+    //       fontSize: "1rem",
+    //       width: "100%",
+    //       position: "absolute",
+    //       top:0,
+    //       marginBottom:"2rem",
 
-          left: "200%",
-          zIndex: 99999,
-        }}
-      />
-      {results.length > 0 && (
-        <div
-          style={{
-            position: "absolute",
-            top: "2.5rem",
-            left: "200%",
+    //       left: "200%",
+    //       zIndex: 99999,
+    //     }}
+    //   />
+    //   {results.length > 0 && (
+    //     <div
+    //       style={{
+    //         position: "absolute",
+    //         top: "2.5rem",
+    //         left: "200%",
 
-            background: "#fff",
-            border: "1px solid #eee",
-            boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
-            zIndex: 9900,
-            minWidth: "220px",
-            borderRadius: "0.5rem",
-            maxHeight: "200px",
-            overflowY: "auto",
-          }}
-        >
-          {results.map((r, idx) => (
-            <div
-              key={idx}
-              style={{
-                padding: "0.5rem 1rem",
-                borderBottom: "1px solid #f0f0f0",
-                cursor: "pointer",
-                fontSize: "0.95rem",
-                color: "#333",
-              }}
-            >
-              {r}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
+    //         background: "#fff",
+    //         border: "1px solid #eee",
+    //         boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+    //         zIndex: 9900,
+    //         minWidth: "220px",
+    //         borderRadius: "0.5rem",
+    //         maxHeight: "200px",
+    //         overflowY: "auto",
+    //       }}
+    //     >
+    //       {results.map((r, idx) => (
+    //         <div
+    //           key={idx}
+    //           style={{
+    //             padding: "0.5rem 1rem",
+    //             borderBottom: "1px solid #f0f0f0",
+    //             cursor: "pointer",
+    //             fontSize: "0.95rem",
+    //             color: "#333",
+    //           }}
+    //         >
+    //           {r}
+    //         </div>
+    //       ))}
+    //     </div>
+    //   )}
+    // </div>
+//   );
+// }
 
 const Header = ({
   setAuthStep,
@@ -204,7 +204,7 @@ const Header = ({
             </div>
           )}
 
-          {user && <RestaurantSearch />}
+          {/* {user && <RestaurantSearch />} */}
         </div>
       </div>
 

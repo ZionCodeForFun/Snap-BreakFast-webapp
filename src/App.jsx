@@ -15,7 +15,6 @@ import Address from "./components/pop/Address";
 import ProfileLogout from "./components/pop/ProfileLogout";
 import OrderSuccess from "./components/pop/OrderSuccess";
 import CarouselSection from "./components/CarouselSection";
-import InputAdress from "./components/inputAdress";
 const AppInner = () => {
   const addresses = ["Ogudu", "Festac", "Surulere", "Lekki", "Ikeja"];
   const [user, setUser] = useState(() => {
@@ -92,8 +91,6 @@ const AppInner = () => {
   return (
     <>
       <ScrollToTop />
-      <InputAdress  onSelectRestaurant={setLocation} />
-
       <Header_holder>
         <Header
           user={user}
@@ -106,7 +103,7 @@ const AppInner = () => {
           addresses={addresses}
           setHeaderLocation={setHeaderLocation}
           headerInputocation={Location}
-          setHeaderInputLocation={setLocation}
+          setHeLocation={setLocation}
         />
       </Header_holder>
 
