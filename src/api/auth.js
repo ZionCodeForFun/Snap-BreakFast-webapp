@@ -18,27 +18,18 @@ export const loginUser = async ({ email }) => {
   }
 };
 
-// export const verifyEmailOTP = async ( otp) => {
-//   try {
-//     const response = await axios.post(
-//       "https://tca-cohort-6-first-fullstack-projec.vercel.app/user/otp",
-//       {
-  
-//         otp: String(otp), 
-//       }
-//     );
-//     return response.data;
-//   } catch (error) {
-//     console.error("OTP verification error:", error.response?.data || error);
-//     throw error;
-//   }
-// };
-export const verifyEmailOTP = async (otp) => {
-  const token = localStorage.getItem("authToken"); 
-  const res = await axios.post(
+export const verifyEmailOTP = async (email, otp) => {
+  try {
+    const response = await axios.post(
       "https://tca-cohort-6-first-fullstack-projec.vercel.app/user/otp",
-    { otp },
-    { headers: { Authorization:` Bearer ${token}` } }
-  );
-  return res.data;
+      {
+        email,
+        otp: String(otp),
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("OTP verification error:", error.response?.data || error);
+    throw error;
+  }
 };

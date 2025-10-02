@@ -19,19 +19,35 @@ const Login = ({ setUser, setStep, goToSignup, setShowModal }) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) return toast.error("Enter a valid email!");
 
-     try {
-       const data = await loginUser({ email });
-       toast.success("Login successful!");
-       setUser(data.user);
-       setStep("verify");
-     } catch (error) {
-       toast.error(error.message || "Login failed!");
-     }
-   };
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const foundUser = users.find(
+      (u) => u.email.trim().toLowerCase() === email.trim().toLowerCase()
+    );
+    if (foundUser) {
+      toast.success("Instant login successful!");
+      setUser(foundUser);
+      setStep("verify");
+      if (typeof setShowModal === "function") setShowModal(false);
+      return;
+    }
+
+    try {
+      const data = await loginUser({ email });
+      toast.success("Login successful!");
+      setUser(data.user);
+      setStep("verify");
+      if (typeof setShowModal === "function") setShowModal(false);
+    } catch (error) {
+      toast.error(error.message || "Login failed!");
+    }
+  };
 
   return (
     <Container>
-      <form className="wrapper  animate__animated  animate__bounceIn" onSubmit={handleSubmit}>
+      <form
+        className="wrapper  animate__animated  animate__bounceIn"
+        onSubmit={handleSubmit}
+      >
         <div className="signin_text">
           <h1>Sign in</h1>
           <p>Sign in to continue</p>

@@ -28,7 +28,7 @@ export const BreakHeader = styled.header`
     align-items: center;
     gap: 1rem;
     justify-content: flex-end;
-    margin-right: 5%;
+    margin-right: 1%;
     position: relative;
 
     .cart_icon {

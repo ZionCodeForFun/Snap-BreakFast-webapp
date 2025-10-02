@@ -29,7 +29,7 @@ export const Container = styled.div`
 
       .left {
         width: 75%;
-        min-height: 100vh;
+        min-height: 130vh;
         display: flex;
         flex-direction: column;
 

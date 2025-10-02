@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Auth from "./auth/Auth";
 import { HashRouter, Route, Routes, useNavigate } from "react-router-dom";
 import LandingPage from "./page/Landing/LandingPage";
@@ -16,12 +16,17 @@ import ProfileLogout from "./components/pop/ProfileLogout";
 import OrderSuccess from "./components/pop/OrderSuccess";
 import CarouselSection from "./components/CarouselSection";
 const AppInner = () => {
-  const [user, setUser] = useState(null);
+  const addresses = ["Ogudu", "Festac", "Surulere", "Lekki", "Ikeja"];
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem("currentUser");
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
   const [showModal, setShowModal] = useState(false);
   const [authStep, setAuthStep] = useState("signup");
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
   const [showProfileLogout, setShowProfileLogout] = useState(false);
+  const [showLogout, setShowLogout] = useState(false);
   const [showOrderSuccess, setShowOrderSuccess] = useState(false);
   const [orders, setOrders] = useState([
     {
@@ -32,8 +37,22 @@ const AppInner = () => {
     },
   ]);
   const [showAddressPopup, setShowAddressPopup] = useState(false);
-  const [headerLocation, setHeaderLocation] = useState("");
+  const [headerLocation, setHeaderLocationRaw] = useState("");
   const navigate = useNavigate();
+  const [location, setLocation] = useState("Default Location");
+
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("currentUser", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("currentUser");
+    }
+  }, [user]);
+
+  const setHeaderLocation = (address) => {
+    setHeaderLocationRaw(address);
+    navigate("/dashboard");
+  };
   const handleLiveLocation = (location) => {
     if (
       location &&
@@ -41,7 +60,6 @@ const AppInner = () => {
       location.city.toLowerCase().includes("lagos")
     ) {
       setHeaderLocation(location.address || location.city);
-      navigate("/dashboard");
     } else {
       alert("Location not in Lagos.");
     }
@@ -52,6 +70,20 @@ const AppInner = () => {
   };
 
   const handleCheckout = () => {
+    if (cart.length > 0 && user) {
+      const newOrder = {
+        id: Date.now().toString(),
+        address: headerLocation || "No address",
+        eta: "45 - 55 mins",
+        contact: user?.contact || "N/A",
+        items: cart.map((item) => ({
+          name: item.name,
+          quantity: item.quantity,
+        })),
+        total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      };
+      setOrders((prev) => [...prev, newOrder]);
+    }
     setShowCart(false);
     navigate("/checkout");
   };
@@ -68,6 +100,10 @@ const AppInner = () => {
           onCartClick={() => setShowCart((prev) => !prev)}
           onProfileClick={() => setShowProfileLogout((prev) => !prev)}
           location={headerLocation}
+          addresses={addresses}
+          setHeaderLocation={setHeaderLocation}
+          headerInputocation={Location}
+          setHeLocation={setLocation}
         />
       </Header_holder>
 
@@ -99,19 +135,13 @@ const AppInner = () => {
       {showProfileLogout && user && (
         <ProfileLogout
           onClose={() => setShowProfileLogout(false)}
-          onOrderClick={() => {
-            if (orders.length > 0) {
-              setShowOrderSuccess(true);
-              setShowProfileLogout(false);
-            } else {
-              alert("No orders found!");
-            }
-          }}
-          onLogout={() => {
-            setUser(null);
-            setShowProfileLogout(false);
-          }}
+          orders={orders}
+          onLogout={() => setShowLogout(true)}
         />
+      )}
+
+      {showLogout && (
+        <Logout onClose={() => setShowLogout(false)} setUser={setUser} />
       )}
       {showOrderSuccess && (
         <OrderSuccess

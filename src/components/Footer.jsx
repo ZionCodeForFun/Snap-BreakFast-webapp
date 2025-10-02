@@ -3,20 +3,14 @@ import { SnapFooter } from "../style/FooterStyle";
 import { PiFacebookLogoBold } from "react-icons/pi";
 import { IoLogoInstagram } from "react-icons/io5";
 import { MdWhatsapp } from "react-icons/md";
+import logo2 from "../assets/logo-footer.jpg";
 const Footer = () => {
   return (
     <SnapFooter>
       <div className="logo">
-       
-        <h1>SnapBreakfast</h1>
+        <img src={logo2} alt="" />
       </div>
       <div className="footer_details">
-        <ul>
-          <h3>Restaurants</h3>
-          <li>So Fresh</li>
-          <li>Chop Box</li>
-          <li>Nosh N Nibbles</li>
-        </ul>
         <ul>
           <h3>Legal</h3>
           <li>Terms and conditions</li>
@@ -37,21 +31,26 @@ const Footer = () => {
       <div className="available_cities">
         <h1>Cities where you can order breakfast in Lagos</h1>
         <div className="cities">
-         <p>Ikeja</p>
-         <p>Ogudu</p>
-         <p>Surulere</p>
-         <p>Lekki</p>
-         <p>Gbagada</p>
+          <p>Ikeja</p>
+          <p>Ogudu</p>
+          <p>Surulere</p>
+          <p>Lekki</p>
+          <p>Gbagada</p>
         </div>
       </div>
-     
+
       <div className="copyright">
         <h6>©Copyright 2025 SnapBreakfast</h6>
-        <div
-        className="social_media">
-          <i><PiFacebookLogoBold /></i>
-          <i><IoLogoInstagram /></i>
-          <i><MdWhatsapp /></i>
+        <div className="social_media">
+          <i>
+            <PiFacebookLogoBold />
+          </i>
+          <i>
+            <IoLogoInstagram />
+          </i>
+          <i>
+            <MdWhatsapp />
+          </i>
         </div>
       </div>
     </SnapFooter>

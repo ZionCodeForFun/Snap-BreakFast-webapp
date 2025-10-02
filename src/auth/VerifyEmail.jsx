@@ -30,25 +30,31 @@ const VerifyEmail = ({ user, onVerified, setShowModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user || !user.email) {
+      toast.error("User email is missing!");
+      return;
+    }
     if (otp.some((d) => d === "")) {
       return toast.error("Please enter all 4 digits");
     }
 
     try {
       const code = otp.join("");
-      const data = await verifyEmailOTP( code);
+      const data = await verifyEmailOTP(user.email, code);
       toast.success("Email verified successfully!");
       if (onVerified) onVerified(data.user);
     } catch (error) {
       toast.error(error.response?.data?.message || "Verification failed!");
     }
-    console.log("Submitting:", { email: user.email, otp: code });
+    console.log("Submitting:", { email: user?.email, otp: code });
   };
-
 
   return (
     <Container>
-      <form onSubmit={handleSubmit} className="wrapper animate__animated  animate__bounceIn">
+      <form
+        onSubmit={handleSubmit}
+        className="wrapper animate__animated  animate__bounceIn"
+      >
         <h2>Verify Email Address</h2>
         <p>
           {" "}

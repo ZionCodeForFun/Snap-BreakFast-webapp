@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SignUp from "./SignUp";
 import VerifyEmail from "./VerifyEmail";
 import Login from "./Login";
 
 const Auth = ({ user, setUser, setShowModal, step, setStep }) => {
+  const navigate = useNavigate();
   return (
     <Container>
       {step === "signup" && (
@@ -28,6 +30,7 @@ const Auth = ({ user, setUser, setShowModal, step, setStep }) => {
       {step === "verify" && (
         <VerifyEmail
           user={user}
+          onVerified={() => navigate("/dashboard")}
           goBackToLogin={() => setStep("login")}
           setShowModal={setShowModal}
         />
