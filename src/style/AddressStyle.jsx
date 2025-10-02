@@ -12,9 +12,9 @@ export const ServiceContainer = styled.div`
 export const ServiceContent = styled.div`
   width: 37%;
   height: 74vh;
-  position: absolute;
-  top: 45%;
-  left: 4%;
+  position: fixed;
+  top: 20%;
+  left: 26%;
   background-color: #ffff;
   border-radius: 15px;
   display: flex;

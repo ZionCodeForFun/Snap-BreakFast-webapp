@@ -1,19 +1,20 @@
 import styled from "styled-components";
-import food7 from "../assets/food7.jpg";
+import food6 from "../assets/food6.jpg";
 
 export const Container = styled.div`
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   margin-top: 7rem;
   color: #131313;
 
   .wrapper {
-    width: 86%;
+    width: 90%;
     display: flex;
     flex-direction: column;
-
+    height: 100%;
+    margin-bottom: 15%;
     h5 {
       color: #979696cc;
     }
@@ -21,15 +22,15 @@ export const Container = styled.div`
     .title_holder {
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
-      align-items: center;
-      padding: 2rem;
+      justify-content: end;
+
+      padding: 0.6rem 2rem;
       margin-top: 0.9rem;
       width: 100%;
-      min-height: 55vh;
+      min-height: 45vh;
       border-radius: 1.2rem;
 
-      background: linear-gradient(rgba(19, 19, 19, 0.6)), url(${food7});
+      background: linear-gradient(rgba(19, 19, 19, 0.6)), url(${food6});
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
@@ -40,6 +41,7 @@ export const Container = styled.div`
         align-items: center;
         text-align: center;
         gap: 1.4rem;
+        margin-bottom: 2rem;
 
         h1 {
           color: white;
@@ -56,7 +58,7 @@ export const Container = styled.div`
       p {
         background-color: white;
         width: max-content;
-        padding: 0.3rem 0.8rem;
+        padding: 0.6rem 0.8rem;
         border-radius: 0.6rem;
         font-size: 1.1rem;
         display: flex;
@@ -72,7 +74,7 @@ export const Container = styled.div`
     }
 
     h3 {
-      padding: 2rem 0;
+      padding: 1.5rem 0;
       font-size: 2.3rem;
       display: flex;
       align-items: center;
@@ -87,16 +89,28 @@ export const Container = styled.div`
 
     .open_time {
       display: flex;
-      flex-direction: column;
       gap: 0.3rem;
-
-      h6 {
-        font-size: 1.1rem;
-        font-weight: 100;
+      padding: 0 4rem 0 0;
+      width: 100%;
+      justify-content: space-between;
+      .time_left {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        h6 {
+          font-size: 1.1rem;
+          font-weight: 100;
+        }
+        p {
+          font-size: 1.1rem;
+          color: #979696cc;
+        }
       }
-      p {
+      .min {
         font-size: 1.1rem;
         color: #979696cc;
+
+        margin-bottom: 2rem;
       }
     }
 
@@ -104,21 +118,23 @@ export const Container = styled.div`
       width: 100%;
       display: flex;
       flex-wrap: wrap;
-      gap: 2rem;
-      margin-top: 2rem;
+      gap: 1rem;
+      height: 100%;
+      justify-content: space-between;
+      margin-top: 0.2rem;
 
       .card {
-        flex: 1 1 calc(33% - 2rem);
-        min-width: 280px;
-        height: auto;
+        width: 31%;
+        height: 55%;
         background-color: #f1f1f1cc;
         border-radius: 1rem;
         display: flex;
         flex-direction: column;
-
+        margin-bottom: 1.8rem;
         .image {
           width: 100%;
           height: 220px;
+
           img {
             border-radius: 1rem 1rem 0 0;
             width: 100%;
@@ -133,7 +149,7 @@ export const Container = styled.div`
           display: flex;
           flex-direction: column;
           align-items: center;
-          justify-content: space-between;
+          text-align: center;
 
           h1 {
             font-size: 1.4rem;
@@ -143,7 +159,9 @@ export const Container = styled.div`
           h4 {
             margin: 0.8rem 0 1rem 0;
           }
-
+          p {
+            width: 70%;
+          }
           button {
             width: max-content;
             padding: 0.7rem 2rem;
@@ -159,14 +177,6 @@ export const Container = styled.div`
           }
         }
       }
-    }
-
-    .min {
-      font-size: 1.1rem;
-      color: #979696cc;
-      justify-content: flex-end;
-      display: flex;
-      margin-bottom: 2rem;
     }
   }
 

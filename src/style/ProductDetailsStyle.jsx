@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  min-width: 40%;
+  min-width: 35%;
   height: 100vh;
-
+  position: relative;
   display: flex;
   justify-content: center;
+  right: 0%;
+  top: 0%;
   position: fixed;
-  top: 10%;
-  right: 20%;
+
   z-index: 9999;
   color: #131313;
   background-color: #fff;

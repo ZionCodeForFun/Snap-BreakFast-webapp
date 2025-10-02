@@ -25,7 +25,7 @@ export const Container = styled.div`
 
     .about_faq {
       width: 90%;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       h1 {
         font-size: 1.7rem;
       }
@@ -35,13 +35,13 @@ export const Container = styled.div`
       width: 90%;
       display: flex;
       justify-content: space-between;
-      gap: 2rem;
+      gap: 2.7rem;
 
       .faq_box {
         flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.6rem;
 
         .FAQS {
           width: 100%;

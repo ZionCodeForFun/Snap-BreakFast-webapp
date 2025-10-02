@@ -25,6 +25,7 @@ export const Container = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: center;
+      margin-bottom: 3rem;
       gap: 1.5rem;
 
       h2 {
@@ -39,7 +40,8 @@ export const Container = styled.div`
         justify-content: center;
 
         p {
-          font-weight: 600;
+          font-weight: 500;
+          color: #2c2c2c;
         }
       }
 
@@ -99,7 +101,7 @@ export const Container = styled.div`
       gap: 5rem;
 
       .just_h1 {
-        height: 30vh;
+        height: 20vh;
         display: flex;
         align-items: end;
 
@@ -138,7 +140,7 @@ export const Container = styled.div`
             width: max-content;
             border: none;
             border-radius: 0.5rem;
-            font-weight: 600;
+          
             font-size: 1rem;
             color: white;
             cursor: pointer;
@@ -194,7 +196,7 @@ export const Container = styled.div`
           width: max-content;
           border: none;
           border-radius: 0.5rem;
-          font-weight: 600;
+         
           font-size: 1rem;
           color: white;
           cursor: pointer;

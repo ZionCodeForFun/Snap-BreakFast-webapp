@@ -95,7 +95,12 @@ const SignUp = ({ setUser, goToLogin, goToVerify, setShowModal }) => {
   const HandleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!value.firstName || !value.lastName || !value.email || !value.phoneNumber) {
+    if (
+      !value.firstName ||
+      !value.lastName ||
+      !value.email ||
+      !value.phoneNumber
+    ) {
       toast.error("All required fields must be filled!");
       return;
     }
@@ -115,7 +120,23 @@ const SignUp = ({ setUser, goToLogin, goToVerify, setShowModal }) => {
       const { data } = await SignUpUser(payload);
 
       toast.success("Signup successful!");
-      setUser(data.user);
+
+      const newUser = {
+        firstName: value.firstName,
+        lastName: value.lastName,
+        email: value.email,
+        phoneNumber: value.phoneNumber,
+        refer: value.refer,
+        countryCode: selectedCountry.code,
+      };
+      setUser(newUser);
+      const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
+      if (!existingUsers.some((u) => u.email === newUser.email)) {
+        localStorage.setItem(
+          "users",
+          JSON.stringify([...existingUsers, newUser])
+        );
+      }
 
       setValue({
         firstName: "",
@@ -131,7 +152,7 @@ const SignUp = ({ setUser, goToLogin, goToVerify, setShowModal }) => {
         error.response?.data?.message || error.message || "Failed to signup!"
       );
     }
-   };
+  };
 
   const handleChange = (field) => (e) => {
     setValue((prev) => ({ ...prev, [field]: e.target.value }));
@@ -148,8 +169,11 @@ const SignUp = ({ setUser, goToLogin, goToVerify, setShowModal }) => {
   };
 
   return (
-    <Container >
-      <form onSubmit={HandleSubmit} className="wrapper animate__animated  animate__bounceIn">
+    <Container>
+      <form
+        onSubmit={HandleSubmit}
+        className="wrapper animate__animated  animate__bounceIn"
+      >
         <div className="signup_text">
           <h1>Sign Up</h1>
           <p>Sign up to continue</p>

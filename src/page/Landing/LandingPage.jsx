@@ -4,6 +4,7 @@ import { Container, Main_holder } from "../../style/LandingPageStyle";
 import ProductDetails from "../../components/pop/ProductDetails";
 import FreqentFAQ from "../../components/FreqentFAQ";
 
+
 const LandingPage = ({ onLocationInputClick, onLiveLocation }) => {
   return (
     <Container>
@@ -13,6 +14,7 @@ const LandingPage = ({ onLocationInputClick, onLiveLocation }) => {
           onLiveLocation={onLiveLocation}
         />
         <ServicesSection />
+
         <FreqentFAQ />
         <ProductDetails />
       </Main_holder>

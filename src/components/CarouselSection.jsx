@@ -18,7 +18,7 @@ const CarouselSection = ({ onLocationInputClick, onLiveLocation }) => {
       <article className="wrapper">
         <div className="left_holder">
           <h1>
-            BreakFast That <br /> Powers Productivity...
+            Breakfast That <br /> Powers Productivity...
           </h1>
           <div className="address_input">
             <div
@@ -76,8 +76,9 @@ const CarouselSection = ({ onLocationInputClick, onLiveLocation }) => {
             </div>
           </div>
           <p>
-            Wholesome meals designed to build your focus, energy, and
-            productivity every morning.
+            From protein-packed classics to fresh smoothies, SnapBreakfast helps
+            busy professionals and remote workers eat smart, stay focused, and
+            feel their best.
           </p>
         </div>
         <div className="right_holder">

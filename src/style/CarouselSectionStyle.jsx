@@ -5,13 +5,13 @@ export const Container = styled.div`
   width: 100%;
   max-width: 100vw;
   box-sizing: border-box;
-  height: 80vh;
+  height: 100vh;
   background-image: url(${hero});
   background-position: center;
   background-size: cover;
   display: flex;
   justify-content: center;
-  font-family: roboto, sans-serif;
+ 
 
   margin-top: 5rem;
   padding-bottom: 3rem;
@@ -21,8 +21,8 @@ export const Container = styled.div`
     height: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: end;
-
+    align-items: center;
+    padding-bottom: 2rem;
     .left_holder {
       width: 40%;
       height: 100%;
@@ -30,10 +30,12 @@ export const Container = styled.div`
       flex-direction: column;
       justify-content: center;
       gap: 2rem;
+      padding-bottom: 3rem;
 
       h1 {
-        font-size: 2.7rem;
+        font-size: 2.9rem;
         color: #131313;
+        font-weight: 600;
       }
 
       .address_input {
@@ -76,14 +78,17 @@ export const Container = styled.div`
       }
 
       p {
-        width: 70%;
+        width: 100%;
         line-height: 1.5rem;
       }
     }
 
     .right_holder {
       width: 40%;
-      height: 100%;
+      height: 84%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       img {
         width: 100%;
@@ -125,6 +130,7 @@ export const Container = styled.div`
 
       .right_holder {
         width: 35%;
+        
       }
     }
   }

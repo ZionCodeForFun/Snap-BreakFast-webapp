@@ -21,7 +21,7 @@ export const Container = styled.div`
 
 export const Main_holder = styled.main`
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   align-items: center;
   display: flex;
   flex-direction: column;

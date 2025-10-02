@@ -78,6 +78,7 @@ const FreqentFAQ = () => {
                       position: "absolute",
                       left: 0,
                       right: 0,
+                      top: "59%",
                       zIndex: 2,
                     }}
                   >
@@ -113,6 +114,7 @@ const FreqentFAQ = () => {
                       position: "absolute",
                       left: 0,
                       right: 0,
+                      top: "59%",
                       zIndex: 2,
                     }}
                   >

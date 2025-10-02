@@ -6,27 +6,12 @@ import { FaStar } from "react-icons/fa";
 import axios from "axios";
 import { Container } from "../../style/RestaurantPageStyle";
 import styled from "styled-components";
+import {fetchRestaurantById} from "../../api/Product";  
 
-const SuccessNotification = styled.div`
-  position: fixed;
-  top: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fff;
-  color: #222;
-  padding: 0.75rem 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-  font-weight: 600;
-  z-index: 12000;
-  font-size: 1.1rem;
-`;
 
 const RestaurantPage = ({ cart, setCart }) => {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
-
- 
 
   const [showSuccess, setShowSuccess] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
@@ -100,54 +85,62 @@ const RestaurantPage = ({ cart, setCart }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:5000/api/restaurants/${id}/products`
-        );
+        const res = await fetchRestaurantById(id);
         setProducts(res.data);
       } catch (error) {
-        const fallbackProducts = [
-          {
-            id: 101,
-            name: "Chicken Salad",
-            description: "Shredded chicken, Sweetcorn & grapes",
-            price: 4500,
-            image:
-              "https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/fgxofdbzk1n0mpxqfxwu",
-          },
-          {
-            id: 102,
-            name: "Smoothie Bowl",
-            description: "Banana, oats, strawberries, chia seeds",
-            price: 3500,
-            image:
-              "https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/fgxofdbzk1n0mpxqfxwu",
-          },
-          {
-            id: 103,
-            name: "Smoothie Bowl",
-            description: "Banana, oats, strawberries, chia seeds",
-            price: 3500,
-            image:
-              "https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/fgxofdbzk1n0mpxqfxwu",
-          },
-          {
-            id: 104,
-            name: "Smoothie Bowl",
-            description: "Banana, oats, strawberries, chia seeds",
-            price: 3500,
-            image:
-              "https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/fgxofdbzk1n0mpxqfxwu",
-          },
-          {
-            id: 105,
-            name: "Smoothie Bowl",
-            description: "Banana, oats, strawberries, chia seeds",
-            price: 3500,
-            image:
-              "https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/fgxofdbzk1n0mpxqfxwu",
-          },
-        ];
-        setProducts(fallbackProducts);
+        // const fallbackProducts = [
+        //   {
+        //     id: 101,
+        //     name: "Chicken Salad",
+        //     description: "Shredded chicken, Sweetcorn & grapes",
+        //     price: 4500,
+        //     image:
+        //       "https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/fgxofdbzk1n0mpxqfxwu",
+        //   },
+        //   {
+        //     id: 102,
+        //     name: "Smoothie Bowl",
+        //     description: "Banana, oats, strawberries, chia seeds",
+        //     price: 3500,
+        //     image:
+        //       "https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/fgxofdbzk1n0mpxqfxwu",
+        //   },
+        //   {
+        //     id: 103,
+        //     name: "Smoothie Bowl",
+        //     description: "Banana, oats, strawberries, chia seeds",
+        //     price: 3500,
+        //     image:
+        //       "https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/fgxofdbzk1n0mpxqfxwu",
+        //   },
+        //   {
+        //     id: 104,
+        //     name: "Smoothie Bowl",
+        //     description: "Banana, oats, strawberries, chia seeds",
+        //     price: 3500,
+        //     image:
+        //       "https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/fgxofdbzk1n0mpxqfxwu",
+        //   },
+        //   {
+        //     id: 105,
+        //     name: "Smoothie Bowl",
+        //     description: "Banana, oats, strawberries, chia seeds",
+        //     price: 3500,
+        //     image:
+        //       "https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/fgxofdbzk1n0mpxqfxwu",
+        //   },
+        //   {
+        //     id: 106,
+        //     name: "Smoothie Bowl",
+        //     description: "Banana, oats, strawberries, chia seeds",
+        //     price: 3500,
+        //     image:
+        //       "https://glovo.dhmedia.io/image/customer-assets-glovo/countries/Stores/fgxofdbzk1n0mpxqfxwu",
+        //   },
+        // ];
+        // setProducts(fallbackProducts);
+
+    
       }
     };
 
@@ -160,7 +153,7 @@ const RestaurantPage = ({ cart, setCart }) => {
     <>
       {showSuccess && (
         <SuccessNotification className="animate__animated animate__fadeInDown">
-          Added successfully!
+          Item successfully Added to cart!
         </SuccessNotification>
       )}
       <Container>
@@ -188,10 +181,12 @@ const RestaurantPage = ({ cart, setCart }) => {
             </span>
           </h3>
           <div className="open_time">
-            <h6>Opening time</h6>
-            <p>{restaurant.opening}</p>
+            <div className="time_left">
+              <h6>Opening time</h6>
+              <p>{restaurant.opening}</p>
+            </div>
+            <p className="min">{restaurant.minOrder}</p>
           </div>
-          <p className="min">{restaurant.minOrder}</p>
           <div className="Card_holder">
             {products.map((product) => (
               <div
@@ -238,3 +233,18 @@ const RestaurantPage = ({ cart, setCart }) => {
 };
 
 export default RestaurantPage;
+
+const SuccessNotification = styled.div`
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: green;
+  color: #fff;
+  padding: 0.75rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  font-weight: 600;
+  z-index: 99999999;
+  font-size: 1.1rem;
+`
