@@ -110,9 +110,8 @@ export const BreakHeader = styled.header`
     padding: 0.5rem 0;
 
     .header_left {
-      width: 100%;
-      justify-content: center;
-
+      width: 50%;
+       justify-content: start;
       img {
         width: 55%;
       }
@@ -127,7 +126,7 @@ export const BreakHeader = styled.header`
   }
 
   @media (max-width: 480px) {
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     gap: 1rem;

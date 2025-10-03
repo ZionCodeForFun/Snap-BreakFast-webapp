@@ -42,7 +42,7 @@ const VerifyEmail = ({ user, onVerified, setShowModal }) => {
       const code = otp.join("");
       const data = await verifyEmailOTP(user.email, code);
       toast.success("Email verified successfully!");
-      if (onVerified) onVerified(data.user);
+      if (onVerified) onVerified(data?.user || user);
     } catch (error) {
       toast.error(error.response?.data?.message || "Verification failed!");
     }

@@ -7,7 +7,6 @@ import food6 from "../../assets/food6.jpg";
 
 import { Container } from "../../style/ProductDetailsStyle";
 const ProductDetails = ({ product, onClose, onAddToCart }) => {
-  // Only use product.images, no fallback
   let images = [];
   if (product?.images && product.images.length > 0) {
     if (typeof product.images[0] === "object" && product.images[0]?.url) {

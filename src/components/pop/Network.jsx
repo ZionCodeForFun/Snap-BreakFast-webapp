@@ -25,7 +25,6 @@ const Network = ({ onClose }) => {
           </div>
           <article>Pay with Kora</article>
 
-          {/* custom radio */}
           <label className="radio-container">
             <input
               type="radio"
@@ -47,7 +46,7 @@ const Network = ({ onClose }) => {
             disabled={!selectedMethod}
             onClick={() => {
               if (selectedMethod === "kora") {
-                window.location.href = "https://paystack.com/pay"; // Replace with any gateway URL
+                window.location.href = "https://www.korahq.com/";
               }
             }}
           >
@@ -64,7 +63,6 @@ const Network = ({ onClose }) => {
 
 export default Network;
 
-// styled components
 const Overlay = styled.div`
   position: fixed;
   top: 0;

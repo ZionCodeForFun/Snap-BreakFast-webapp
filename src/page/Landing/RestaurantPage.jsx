@@ -68,9 +68,8 @@ const RestaurantPage = ({ cart, setCart }) => {
     };
     fetchData();
   }, [_id]);
-  // console.log("zion", products);
+
   const handleCart = (product) => {
-    // Ensure images array is present for cart rendering
     const productWithImages = {
       ...product,
       images:
@@ -102,7 +101,6 @@ const RestaurantPage = ({ cart, setCart }) => {
   };
 
   const handleCardClick = (product) => {
-    // Ensure images array for ProductDetails
     const productWithImages = {
       ...product,
       images:

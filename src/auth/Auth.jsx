@@ -7,6 +7,31 @@ import Login from "./Login";
 
 const Auth = ({ user, setUser, setShowModal, step, setStep }) => {
   const navigate = useNavigate();
+
+  const pendingUser = (() => {
+    try {
+      const p = localStorage.getItem("pendingUser");
+      return p ? JSON.parse(p) : null;
+    } catch (e) {
+      return null;
+    }
+  })();
+
+  const handleVerified = (verifiedUser) => {
+    if (typeof setUser === "function") {
+      setUser(verifiedUser || pendingUser);
+    }
+    try {
+      localStorage.removeItem("pendingUser");
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify(verifiedUser || pendingUser)
+      );
+    } catch (e) {}
+    setShowModal(false);
+    navigate("/dashboard");
+  };
+
   return (
     <Container>
       {step === "signup" && (
@@ -29,8 +54,8 @@ const Auth = ({ user, setUser, setShowModal, step, setStep }) => {
 
       {step === "verify" && (
         <VerifyEmail
-          user={user}
-          onVerified={() => navigate("/dashboard")}
+          user={pendingUser || user}
+          onVerified={(verified) => handleVerified(verified)}
           goBackToLogin={() => setStep("login")}
           setShowModal={setShowModal}
         />
