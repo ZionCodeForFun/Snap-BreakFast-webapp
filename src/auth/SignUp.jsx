@@ -129,7 +129,13 @@ const SignUp = ({ setUser, goToLogin, goToVerify, setShowModal }) => {
         refer: value.refer,
         countryCode: selectedCountry.code,
       };
-      setUser(newUser);
+
+      try {
+        localStorage.setItem("pendingUser", JSON.stringify(newUser));
+      } catch (e) {
+        console.warn("Could not save pendingUser:", e);
+      }
+
       const existingUsers = JSON.parse(localStorage.getItem("users")) || [];
       if (!existingUsers.some((u) => u.email === newUser.email)) {
         localStorage.setItem(

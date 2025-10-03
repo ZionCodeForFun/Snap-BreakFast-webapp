@@ -117,7 +117,6 @@ const AppInner = () => {
           setHeLocation={setLocation}
         />
       </Header_holder>
-
       {showAddressPopup && (
         <Address
           onClose={() => setShowAddressPopup(false)}
@@ -143,7 +142,6 @@ const AppInner = () => {
           }}
         />
       )}
-
       {showProfileLogout && user && (
         <ProfileLogout
           onClose={() => setShowProfileLogout(false)}
@@ -152,7 +150,6 @@ const AppInner = () => {
           userLocation={headerLocation}
         />
       )}
-
       {showLogout && (
         <Logout onClose={() => setShowLogout(false)} setUser={setUser} />
       )}
@@ -162,7 +159,6 @@ const AppInner = () => {
           orders={orders}
         />
       )}
-
       <Routes>
         <Route
           path="/"
@@ -197,7 +193,6 @@ const AppInner = () => {
           element={<RestaurantPage cart={cart} setCart={setCart} />}
         />
       </Routes>
-
       {showModal && (
         <Auth
           user={user}
@@ -207,12 +202,13 @@ const AppInner = () => {
           setStep={setAuthStep}
         />
       )}
-
-      {showModal && user && (
-        (() => { setShowModal(false); return null; })()
+      {showModal &&
+        user &&
+        (() => {
+          setShowModal(false);
+          return null;
+        })()}
       )}
-      )}
-
       {showCart && (
         <CartContainer
           cart={cart}
@@ -246,7 +242,6 @@ const AppInner = () => {
           onCheckout={handleCheckout}
         />
       )}
-
       <Footer_holder>
         <Footer />
       </Footer_holder>
