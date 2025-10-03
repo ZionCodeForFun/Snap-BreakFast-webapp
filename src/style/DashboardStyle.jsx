@@ -39,7 +39,7 @@ export const Container = styled.div`
 
     .card_holder {
       width: 100%;
-      min-height: 40vh;
+      min-height: 50vh;
       display: flex;
       gap: 2rem;
 
@@ -49,10 +49,11 @@ export const Container = styled.div`
         display: flex;
         flex-direction: column;
         gap: 1.1rem;
+        height: 100%;
 
         .image {
           width: 100%;
-          height: 30%;
+          height: 40%;
           img {
             width: 100%;
             height: 100%;

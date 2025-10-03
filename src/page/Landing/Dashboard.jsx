@@ -3,40 +3,28 @@ import { useNavigate, Link } from "react-router-dom";
 import { Container } from "../../style/DashboardStyle";
 import { IoRestaurantOutline } from "react-icons/io5";
 import { TbBike } from "react-icons/tb";
-import {  restaurants } from "../../api/Product"; 
+import { fetchRestaurants } from "../../api/Product";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  
+  const [restaurants, setRestaurants] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  // const ids = [
-  //   { name: "chop-box", id: "68da03344519cbfb086d151a" },
-  //   { name: "nosh n nibble", id: "68da03f24519cbfb086d151d" },
-  //   { name: "so-fresh", id: "68da057590200e93097263d4" },
-  // ];
-  
   useEffect(() => {
     const getRestaurants = async () => {
+      setLoading(true);
       try {
-        const restaurantData = await fetchRestaurants()
-        setRestaurants(restaurantData);
-        console.log("Restaurant ID before fetch:", restaurantData.name);
-      } catch (error) {console.error("Error fetching restaurants:", error )  
+        const restaurantData = await fetchRestaurants();
+        setRestaurants(restaurantData?.data);
+        console.log(" restaurants:", restaurantData?.data);
+      } catch (error) {
         console.error("Error fetching restaurants:", error);
+      } finally {
+        setLoading(false);
       }
     };
     getRestaurants();
   }, []);
-
-        // If you want to fetch products too, make sure fetchProductsByRestaurantId is defined
-      //    const restaurantWithProducts = await Promise.all(
-      //     restaurantData.map(async (restaurant) => {
-      //        const products = await fetchProductsByRestaurantId(restaurant.id);
-      //       return { ...restaurant, products };
-      //      })
-      // );
-      //   setRestaurants(restaurantWithProducts);
-
 
   return (
     <Container>
@@ -52,29 +40,45 @@ const Dashboard = () => {
           <p>Restaurants</p>
         </div>
 
-        <h2>Feature restaurants</h2>
-        <div className="card_holder">
-          {restaurants.map((restaurant) => (
-            <Link
-              to={`/restaurantPage/${restaurant.id}`}
-              key={restaurant.id}
-              className="card"
-              style={{ textDecoration: "none", color: "inherit" }}
-            >
-              <div className="image">
-                <img src={restaurant.img} alt={restaurant.name} />
+        <h2>Featured Restaurants</h2>
+        {loading ? (
+          <div style={{ textAlign: "center", margin: "2rem" }}>
+            Loading restaurants...
+          </div>
+        ) : (
+          <div className="card_holder">
+            {restaurants.map((restaurant) => (
+              <div
+                key={restaurant._id}
+                className="card"
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  cursor: "pointer",
+                }}
+                onClick={() => navigate(`/restaurantPage/${restaurant._id}`)}
+              >
+                <div className="image">
+                  <img
+                    src={restaurant?.coverImage?.url}
+                    alt={restaurant.name}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                    }}
+                  />
+                </div>
+                <div className="restaurantName">
+                  <h6>{restaurant.name}</h6>
+                  <p>{restaurant.description}</p>
+                </div>
+                <div className="bike">
+                  <TbBike />
+                  <p>{restaurant.time}</p>
+                </div>
               </div>
-              <div className="restaurantName">
-                <h6>{restaurant.name}</h6>
-                <p>{restaurant.category}</p>
-              </div>
-              <div className="bike">
-                <TbBike />
-                <p>{restaurant.time}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </article>
     </Container>
   );

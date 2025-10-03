@@ -31,30 +31,42 @@ const CartContainer = ({
           <p>Your cart is empty.</p>
         ) : (
           cart.map((item) => (
-            <div className="cart_content" key={item.id}>
+            <div className="cart_content" key={item.id || item._id}>
               <div className="item_img">
-                <img src={item.image} alt={item.name} />
+                <img
+                  src={
+                    item.images && item.images.length > 0
+                      ? typeof item.images[0] === "object" && item.images[0].url
+                        ? item.images[0].url
+                        : item.images[0]
+                      : item.image || "https://via.placeholder.com/80"
+                  }
+                  alt={item.name}
+                />
               </div>
               <div className="food-name">
                 <h4>{item.name}</h4>
                 <div className="increase_btn">
                   <button
                     className="minus"
-                    onClick={() => onDecrement(item.id)}
+                    onClick={() => onDecrement(item.id || item._id)}
                   >
                     -
                   </button>
                   <p>{item.quantity}</p>
                   <button
                     className="plus"
-                    onClick={() => handleIncrement(item.id)}
+                    onClick={() => handleIncrement(item.id || item._id)}
                   >
                     +
                   </button>
                 </div>
               </div>
               <div className="price">
-                <TfiTrash className="trash" onClick={() => onDelete(item.id)} />
+                <TfiTrash
+                  className="trash"
+                  onClick={() => onDelete(item.id || item._id)}
+                />
                 <h4>₦ {item.price.toLocaleString()}</h4>
               </div>
             </div>

@@ -47,7 +47,7 @@ export const Container = styled.div`
             height: 22%;
             display: flex;
             align-items: center;
-
+          
             .btn_holder {
               display: flex;
               font-size: 1rem;

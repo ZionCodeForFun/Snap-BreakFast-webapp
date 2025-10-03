@@ -36,7 +36,7 @@ const Login = ({ setUser, setStep, goToSignup, setShowModal }) => {
       toast.success("Login successful!");
       setUser(data.user);
       setStep("verify");
-      if (typeof setShowModal === "function") setShowModal(false);
+      setShowModal(false);
     } catch (error) {
       toast.error(error.message || "Login failed!");
     }

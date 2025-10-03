@@ -16,7 +16,7 @@ export const Container = styled.div`
 
   .wrapper {
     width: 100%;
-    min-height: 80vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: #ffc244;

@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import Network from "../../components/pop/Network";
 import { useNavigate } from "react-router-dom";
 import { FaArrowLeft } from "react-icons/fa";
 import { FaBottleWater } from "react-icons/fa6";
 import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
 import { Container } from "../../style/CheckOutStyle";
 import { IoRestaurantOutline, IoLocationOutline } from "react-icons/io5";
-import food5 from "../../assets/food5.jpg";
 
 const CheckOutPage = ({ cart, setCart, user, setShowModal, setAuthStep }) => {
+  const [showNetwork, setShowNetwork] = useState(false);
   const navigate = useNavigate();
 
   const [extraCutlery, setExtraCutlery] = useState(false);
@@ -44,16 +45,13 @@ const CheckOutPage = ({ cart, setCart, user, setShowModal, setAuthStep }) => {
     if (!user) {
       if (setShowModal && setAuthStep) {
         setAuthStep("signup");
-      
-    
         setShowModal(true);
       } else {
         navigate("/", { replace: true });
       }
       return;
     }
-    alert("Order placed! (Demo)");
-    setCart([]);
+    setShowNetwork(true);
   };
 
   return (
@@ -71,13 +69,18 @@ const CheckOutPage = ({ cart, setCart, user, setShowModal, setAuthStep }) => {
                 <p>Your cart is empty.</p>
               ) : (
                 cart.map((item) => (
-                  <div className="food-details" key={item.id}>
+                  <div className="food-details" key={item.id || item._id}>
+                    
                     <div className="btn_holder">
-                      <button onClick={() => handleDecrement(item.id)}>
+                      <button
+                        onClick={() => handleDecrement(item.id || item._id)}
+                      >
                         -
                       </button>
                       <p>{item.quantity}</p>
-                      <button onClick={() => handleIncrement(item.id)}>
+                      <button
+                        onClick={() => handleIncrement(item.id || item._id)}
+                      >
                         +
                       </button>
                     </div>
@@ -142,7 +145,19 @@ const CheckOutPage = ({ cart, setCart, user, setShowModal, setAuthStep }) => {
           <div className="right">
             <header className="header">
               <h1>Summary</h1>
-              <img src={food5} alt="" />
+              <img
+                src={
+                  cart && cart.length > 0
+                    ? cart[0].images && cart[0].images.length > 0
+                      ? typeof cart[0].images[0] === "object" &&
+                        cart[0].images[0].url
+                        ? cart[0].images[0].url
+                        : cart[0].images[0]
+                      : cart[0].image || "https://via.placeholder.com/80"
+                    : "https://via.placeholder.com/80"
+                }
+                alt={cart && cart.length > 0 ? cart[0].name : "Summary"}
+              />
             </header>
             <section className="summary">
               <div className="total_holder">
@@ -175,6 +190,7 @@ const CheckOutPage = ({ cart, setCart, user, setShowModal, setAuthStep }) => {
             >
               {user ? "Pay to order" : "Login to order"}
             </button>
+            {showNetwork && <Network onClose={() => setShowNetwork(false)} />}
           </div>
         </div>
       </article>
