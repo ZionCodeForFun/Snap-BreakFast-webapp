@@ -14,11 +14,11 @@ export const Header_holder = styled.header`
 export const Footer_holder = styled.footer`
   width: 100%;
   height: 100%;
-  background: url(${footerbg}), #131313;
+  background:  #131313;
   background-position: center;
   background-repeat: no-repeat;
 
   display: flex;
   justify-content: center;
-  clip-path: ellipse(200% 100% at 90% 100%);
+ 
 `;

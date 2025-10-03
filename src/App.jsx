@@ -14,16 +14,24 @@ import Logout from "./components/pop/Logout";
 import Address from "./components/pop/Address";
 import ProfileLogout from "./components/pop/ProfileLogout";
 import OrderSuccess from "./components/pop/OrderSuccess";
-import CarouselSection from "./components/CarouselSection";
+import Network from "./components/pop/Network";
+
 const AppInner = () => {
   const addresses = ["Ogudu", "Festac", "Surulere", "Lekki", "Ikeja"];
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem("currentUser");
     return storedUser ? JSON.parse(storedUser) : null;
   });
+
   const [showModal, setShowModal] = useState(false);
   const [authStep, setAuthStep] = useState("signup");
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
   const [showCart, setShowCart] = useState(false);
   const [showProfileLogout, setShowProfileLogout] = useState(false);
   const [showLogout, setShowLogout] = useState(false);
@@ -49,10 +57,13 @@ const AppInner = () => {
     }
   }, [user]);
 
+  console.log("User state changed:", user);
+
   const setHeaderLocation = (address) => {
     setHeaderLocationRaw(address);
     navigate("/dashboard");
   };
+
   const handleLiveLocation = (location) => {
     if (
       location &&
@@ -102,7 +113,7 @@ const AppInner = () => {
           location={headerLocation}
           addresses={addresses}
           setHeaderLocation={setHeaderLocation}
-          headerInputocation={Location}
+          headerInputocation={location}
           setHeLocation={setLocation}
         />
       </Header_holder>
@@ -132,11 +143,13 @@ const AppInner = () => {
           }}
         />
       )}
+
       {showProfileLogout && user && (
         <ProfileLogout
           onClose={() => setShowProfileLogout(false)}
           orders={orders}
           onLogout={() => setShowLogout(true)}
+          userLocation={headerLocation}
         />
       )}
 
@@ -149,6 +162,7 @@ const AppInner = () => {
           orders={orders}
         />
       )}
+
       <Routes>
         <Route
           path="/"
@@ -164,9 +178,8 @@ const AppInner = () => {
             />
           }
         />
-        <Route path="/e" element={<Logout />} />
-
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/d" element={<Network />} />
         <Route
           path="/checkout"
           element={
@@ -180,7 +193,7 @@ const AppInner = () => {
           }
         />
         <Route
-          path="/restaurantPage/:id"
+          path="/restaurantPage/:_id"
           element={<RestaurantPage cart={cart} setCart={setCart} />}
         />
       </Routes>
@@ -194,6 +207,12 @@ const AppInner = () => {
           setStep={setAuthStep}
         />
       )}
+
+      {showModal && user && (
+        (() => { setShowModal(false); return null; })()
+      )}
+      )}
+
       {showCart && (
         <CartContainer
           cart={cart}
@@ -201,14 +220,16 @@ const AppInner = () => {
           onIncrement={(id) =>
             setCart((prev) =>
               prev.map((item) =>
-                item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+                item.id === id || item._id === id
+                  ? { ...item, quantity: item.quantity + 1 }
+                  : item
               )
             )
           }
           onDecrement={(id) =>
             setCart((prev) =>
               prev.map((item) =>
-                item.id === id
+                item.id === id || item._id === id
                   ? {
                       ...item,
                       quantity: item.quantity > 1 ? item.quantity - 1 : 1,
@@ -218,11 +239,14 @@ const AppInner = () => {
             )
           }
           onDelete={(id) =>
-            setCart((prev) => prev.filter((item) => item.id !== id))
+            setCart((prev) =>
+              prev.filter((item) => item.id !== id && item._id !== id)
+            )
           }
           onCheckout={handleCheckout}
         />
       )}
+
       <Footer_holder>
         <Footer />
       </Footer_holder>
@@ -235,4 +259,5 @@ const App = () => (
     <AppInner />
   </HashRouter>
 );
+
 export default App;

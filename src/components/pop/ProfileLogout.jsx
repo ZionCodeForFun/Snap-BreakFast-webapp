@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { TbLogout2 } from "react-icons/tb";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoClose } from "react-icons/io5";
-const ProfileLogout = ({ onClose, orders = [], onLogout }) => {
+
+const ProfileLogout = ({ onClose, orders = [], onLogout, userLocation }) => {
   const [showOrders, setShowOrders] = useState(false);
   return (
     <Container>
@@ -17,6 +18,9 @@ const ProfileLogout = ({ onClose, orders = [], onLogout }) => {
       </div>
       {showOrders && (
         <OrderContainer>
+      <div style={{ padding: "0.5rem 1rem", borderBottom: "1px solid #eee" }}>
+        <strong>Current Location:</strong> {userLocation || "Not set"}
+      </div>
           <header className="header">
             <div className="close-holder">
               {" "}
@@ -33,13 +37,14 @@ const ProfileLogout = ({ onClose, orders = [], onLogout }) => {
                   <strong>ID:</strong> {order.id}
                 </p>
                 <p>
-                  <strong>Address:</strong> {order.address}
+                  <strong>Address:</strong>{" "}
+                  {order.address || userLocation || "Not set"}
                 </p>
                 <p>
-                  <strong>ETA:</strong> {order.eta}
+                  <strong>ETA:{order.eta}</strong> 
                 </p>
                 <p>
-                  <strong>Contact:</strong> {order.contact}
+                  <strong>Contact:{order.contact}</strong> 
                 </p>
                 <p>
                   <strong>Items:</strong>
@@ -76,7 +81,7 @@ const OrderContainer = styled.div`
   border-radius: 0.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   padding: 1rem;
-  z-index:99999;
+  z-index: 99999;
   .header {
     display: flex;
     flex-direction: column;

@@ -7,11 +7,15 @@ import food6 from "../../assets/food6.jpg";
 
 import { Container } from "../../style/ProductDetailsStyle";
 const ProductDetails = ({ product, onClose, onAddToCart }) => {
-  const defaultImages = [food5, food7, food6];
-  const images =
-    product?.images && product.images.length > 0
-      ? product.images
-      : defaultImages;
+  // Only use product.images, no fallback
+  let images = [];
+  if (product?.images && product.images.length > 0) {
+    if (typeof product.images[0] === "object" && product.images[0]?.url) {
+      images = product.images.map((imgObj) => imgObj.url);
+    } else {
+      images = product.images;
+    }
+  }
   const [currentIdx, setCurrentIdx] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
@@ -31,7 +35,7 @@ const ProductDetails = ({ product, onClose, onAddToCart }) => {
     if (typeof onAddToCart === "function") {
       onAddToCart({ ...product, quantity });
     }
-  
+
     setTimeout(() => setShowSuccess(false), 1500);
   };
 
@@ -39,7 +43,6 @@ const ProductDetails = ({ product, onClose, onAddToCart }) => {
 
   return (
     <Container>
-     
       <article className="wrapper">
         <header className="header">
           <h1>Product details</h1>
@@ -62,12 +65,9 @@ const ProductDetails = ({ product, onClose, onAddToCart }) => {
           ))}
         </div>
         <div className="details_text">
-          <h1>{product.name || "Grilled fish paster"}</h1>
-          <h4>{product.price || 6500}</h4>
-          <p>
-            {product.description ||
-              "Grilled fish season with pepper, fried plantain and yam"}
-          </p>
+          <h1>{product.name}</h1>
+          <h4>{product.price}</h4>
+          <p>{product.description}</p>
         </div>
         <footer className="footer_btn">
           <div className="increase_btn">

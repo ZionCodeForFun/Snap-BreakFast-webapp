@@ -8,7 +8,7 @@ export const SnapFooter = styled.footer`
   flex-direction: column;
 
   color: white;
-  background: url("/your-footer-bg.jpg") no-repeat center center/cover;
+  background: #131313;
   padding-left: 5rem;
   padding-top: 10rem;
 

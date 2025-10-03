@@ -36,9 +36,11 @@ export const BreakHeader = styled.header`
       display: flex;
       align-items: center;
 
+      cursor: pointer;
+
       .cart {
         font-size: 2.5rem;
-        cursor: pointer;
+        pointer-events: none;
       }
 
       span {
