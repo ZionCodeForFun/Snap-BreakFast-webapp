@@ -26,7 +26,7 @@ const RestaurantPage = ({ cart, setCart }) => {
       description:
         "Wholesome, nutrient-packed meals made from the best local produce. From smoothies to hearty bowls, So-Fresh brings nature’s goodness right to your plate.",
       rating: 4.6,
-      time: "35 - 45 min",
+      time: "45 - 55 min",
       opening: "8:00 am - 11:00 pm",
       minOrder: "Min order: ₦ 1500",
     },
@@ -37,7 +37,7 @@ const RestaurantPage = ({ cart, setCart }) => {
       description:
         "Chop-Box serves classic Nigerian dishes with a modern twist. Comfort food that feels like home, made fresh daily.",
       rating: 4.4,
-      time: "30 - 40 min",
+      time: "45 - 55 min",
       opening: "9:00 am - 10:00 pm",
       minOrder: "Min order: ₦ 1500",
     },
@@ -48,7 +48,7 @@ const RestaurantPage = ({ cart, setCart }) => {
       description:
         "From quick bites to full meals, Nosh N Nibble brings you bold flavors in every dish. Perfect for foodies on the go.",
       rating: 4.7,
-      time: "25 - 35 min",
+      time: "45 - 55 min",
       opening: "10:00 am - 11:30 pm",
       minOrder: "Min order: ₦ 1500",
     },

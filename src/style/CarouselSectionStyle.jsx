@@ -11,7 +11,6 @@ export const Container = styled.div`
   background-size: cover;
   display: flex;
   justify-content: center;
- 
 
   margin-top: 5rem;
   padding-bottom: 3rem;
@@ -46,6 +45,9 @@ export const Container = styled.div`
         background-color: white;
         justify-content: space-around;
         border-radius: 0.5rem;
+        @media screen and (max-width: 768px) {
+          flex-direction: column;
+        }
 
         .location_input {
           display: flex;
@@ -99,7 +101,6 @@ export const Container = styled.div`
     }
   }
 
- 
   @media (min-width: 600px) and (max-width: 900px) {
     height: 60vh;
     margin-top: 3rem;
@@ -130,15 +131,13 @@ export const Container = styled.div`
 
       .right_holder {
         width: 35%;
-        
       }
     }
   }
 
- 
   @media (max-width: 480px) {
-    height: 45vh;
-    margin-top: 2rem;
+    height: 100vh;
+    margin-top: 4.7rem;
 
     .wrapper {
       flex-direction: column;
@@ -156,8 +155,16 @@ export const Container = styled.div`
         .address_input {
           height: 2rem;
 
+          @media screen and (max-width: 768px) {
+              width: 100%;
+              height: 5rem;
+            
+              
           input {
             font-size: 0.8rem;
+
+              
+            }
           }
         }
 
@@ -165,12 +172,23 @@ export const Container = styled.div`
           width: 100%;
           font-size: 0.85rem;
           text-align: center;
+          @media screen and (max-width: 768px) {
+            margin-top: 2.4rem;
+          }
         }
       }
 
       .right_holder {
         width: 80%;
         margin-top: 1rem;
+        @media screen and (max-width: 768px) {
+          height: 50vh;
+          img {
+            height: 34vh;
+            margin-bottom: 5rem;
+            width: 5vw;
+          }
+        }
 
         img {
           width: 100%;

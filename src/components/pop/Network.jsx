@@ -74,7 +74,7 @@ const Overlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 9999;
-`;
+  `;
 
 const Holder = styled.div`
   width: 40%;
@@ -83,6 +83,10 @@ const Holder = styled.div`
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  @media screen and (max-width:768px) {
+   width: 100%;
+   
+  }
 `;
 
 const Close = styled.div`

@@ -82,6 +82,12 @@ const OrderContainer = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   padding: 1rem;
   z-index: 99999;
+  @media screen and (max-width:768px) {
+    min-width: 13vw;
+    height: 70vh;
+    left: 0;
+
+  }
   .header {
     display: flex;
     flex-direction: column;
@@ -123,6 +129,11 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border: 2px solid green;
+  @media screen and (max-width:768px) {
+    width: 50%;
+    position: fixed;
+    right:0;
+  }
   .top {
     display: flex;
     width: 100%;

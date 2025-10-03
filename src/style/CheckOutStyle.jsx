@@ -77,6 +77,7 @@ export const Container = styled.div`
             justify-content: end;
             display: flex;
             width: 50%;
+          
           }
         }
 

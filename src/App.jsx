@@ -15,7 +15,7 @@ import Address from "./components/pop/Address";
 import ProfileLogout from "./components/pop/ProfileLogout";
 import OrderSuccess from "./components/pop/OrderSuccess";
 import Network from "./components/pop/Network";
-
+import { ToastContainer, toast } from "react-toastify";
 const AppInner = () => {
   const addresses = ["Ogudu", "Festac", "Surulere", "Lekki", "Ikeja"];
   const [user, setUser] = useState(() => {
@@ -24,7 +24,7 @@ const AppInner = () => {
   });
 
   const [showModal, setShowModal] = useState(false);
-  const [authStep, setAuthStep] = useState("signup");
+  const [authStep, setAuthStep] = useState("");
   const [cart, setCart] = useState(() => {
     const storedCart = localStorage.getItem("cart");
     return storedCart ? JSON.parse(storedCart) : [];
@@ -119,13 +119,15 @@ const AppInner = () => {
       </Header_holder>
       {showAddressPopup && (
         <Address
+        toast={toast}
+        ToastContainer={ToastContainer}
           onClose={() => setShowAddressPopup(false)}
           onAddressSubmit={(address) => {
             if (address && address.toLowerCase().includes("lagos")) {
               setHeaderLocation(address);
               setShowAddressPopup(false);
             } else {
-              alert("Sorry, we only deliver within Lagos.");
+              toast.error("Sorry, we only deliver within Lagos.");
             }
           }}
           onDetectLocation={(location) => {
@@ -208,7 +210,7 @@ const AppInner = () => {
           setShowModal(false);
           return null;
         })()}
-      )}
+
       {showCart && (
         <CartContainer
           cart={cart}

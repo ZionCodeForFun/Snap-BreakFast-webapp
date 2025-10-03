@@ -12,13 +12,13 @@ import {
 
 import { IoCloseOutline } from "react-icons/io5";
 
-const Address = ({ onClose, onAddressSubmit, onDetectLocation }) => {
+const Address = ({ onClose, onAddressSubmit, onDetectLocation,ToastContainer,toast }) => {
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleDetectLocation = () => {
     if (!navigator.geolocation) {
-      alert("Geolocation is not supported by your browser.");
+      toast.error("Geolocation is not supported by your browser.");
       return;
     }
     setLoading(true);
@@ -41,12 +41,12 @@ const Address = ({ onClose, onAddressSubmit, onDetectLocation }) => {
             onDetectLocation({ city, address: data.display_name });
           }
         } catch (err) {
-          alert("Could not detect location.");
+          toast.error("Could not detect location.");
         }
         setLoading(false);
       },
       () => {
-        alert("Unable to retrieve your location.");
+        toast("Unable to retrieve your location.");
         setLoading(false);
       }
     );
@@ -86,8 +86,10 @@ const Address = ({ onClose, onAddressSubmit, onDetectLocation }) => {
           </button>
         </ServicetextContent>
       </ServiceContent>
-    </ServiceContainer>
+      <ToastContainer autoClose={2000} position="top-center"/>    
+      </ServiceContainer>
   );
 };
 
 export default Address;
+
