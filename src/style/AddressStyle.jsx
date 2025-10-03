@@ -22,6 +22,12 @@ export const ServiceContent = styled.div`
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   align-items: center;
   gap: 1rem;
+  @media screen and (max-width:768px) {
+    width: 100%;
+    position: fixed;
+    left: 1%;
+    top: 26%;
+  }
 `;
 
 export const Buttonholder = styled.div`

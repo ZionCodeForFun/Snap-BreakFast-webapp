@@ -111,7 +111,7 @@ export const BreakHeader = styled.header`
 
     .header_left {
       width: 50%;
-       justify-content: start;
+     
       img {
         width: 55%;
       }
@@ -121,7 +121,7 @@ export const BreakHeader = styled.header`
       width: 100%;
       justify-content: center;
       margin-right: 0;
-      gap: 1rem;
+      gap: 0.2rem;
     }
   }
 
@@ -148,6 +148,15 @@ export const BreakHeader = styled.header`
       margin-right: 0;
       gap: 0.8rem;
       flex-wrap: wrap;
+      @media screen and (max-width:768px) {
+         width: max-content;
+         flex-direction: column;
+         .login_btn{
+               h2 {
+        font-size: 0.7rem;
+      }
+         }
+      }
     }
 
     .login_btn {

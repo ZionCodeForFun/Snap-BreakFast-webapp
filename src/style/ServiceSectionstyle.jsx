@@ -27,6 +27,17 @@ export const Container = styled.div`
       justify-content: center;
       margin-bottom: 3rem;
       gap: 1.5rem;
+      @media screen and (max-width:768px) {
+        height: 70vh;
+        align-items:center;
+        h2{
+          font-size: 1rem;
+        }
+        .cities{
+          flex-direction:column;
+          font-size: 1.5rem;
+        }
+      }
 
       h2 {
         font-size: 1.8rem;
@@ -71,7 +82,9 @@ export const Container = styled.div`
         .img_holder {
           width: 100%;
           height: 60vh;
-
+@media screen and (max-width:768px) {
+  
+}
           img {
             width: 100%;
             height: 100%;

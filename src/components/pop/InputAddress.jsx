@@ -63,6 +63,7 @@ export const Dropdown = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border-radius: 0.5rem;
   z-index: 100;
+ 
 `;
 
 export const DropdownItem = styled.div`
@@ -88,6 +89,11 @@ export const DeliverysessionContent = styled.div`
   position: fixed;
   top: 2%;
   right: 27%;
+   @media screen  and (max-width:768px) {
+    display: none;
+
+    
+  }
 
 
 

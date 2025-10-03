@@ -31,6 +31,9 @@ export const Container = styled.div`
       justify-content: center;
       border-radius: 0 0.5rem 0.5rem 0;
       margin-bottom: 3rem;
+      @media screen and (max-width:768px) {
+        width: 40%;
+      }
 
       i {
         font-size: 4rem;

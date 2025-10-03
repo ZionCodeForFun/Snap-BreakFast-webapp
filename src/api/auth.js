@@ -7,7 +7,7 @@ export const SignUpUser = async (payload) => {
   return data;
 };
 
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "";
 
 export const loginUser = async ({ email }) => {
   try {
