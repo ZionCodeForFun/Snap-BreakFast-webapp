@@ -4,19 +4,23 @@ export const Container = styled.div`
   width: 100%;
   max-width: 100vw;
   box-sizing: border-box;
-  min-height: 100vh;
+  min-height: 80vh;
   overflow-x: hidden;
   background-position: center;
   background-size: cover;
   display: flex;
-  justify-content: center;
+  justify-content: end;
   flex-direction: column;
   align-items: center;
   color: #131313;
+  @media screen and (max-width:768px) {
+    min-height: 60vh;
+    margin-top: 2rem;
+  }
 
   .wrapper {
     width: 100%;
-    min-height: 100vh;
+    min-height: 60vh;
     display: flex;
     flex-direction: column;
     background-color: #ffc244;
@@ -68,6 +72,7 @@ export const Container = styled.div`
 
   @media (max-width: 900px) {
     .wrapper {
+  
       .about_faq h1 {
         font-size: 1.3rem;
       }
@@ -92,6 +97,7 @@ export const Container = styled.div`
 
   @media (max-width: 768px) {
     .wrapper {
+     min-height: 60vh;
       .about_faq h1 {
         font-size: 1.1rem;
       }

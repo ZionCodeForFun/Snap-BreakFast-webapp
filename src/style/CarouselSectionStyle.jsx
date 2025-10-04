@@ -22,6 +22,8 @@ export const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     padding-bottom: 2rem;
+  
+   
     .left_holder {
       width: 40%;
       height: 100%;
@@ -180,13 +182,15 @@ export const Container = styled.div`
 
       .right_holder {
         width: 80%;
-        margin-top: 1rem;
         @media screen and (max-width: 768px) {
           height: 50vh;
+          width: 100vw;
+          padding: 2rem  2rem 0 2rem;
+          background-color: #ffc244;
           img {
-            height: 34vh;
-            margin-bottom: 5rem;
-            width: 5vw;
+            height: 44vh;
+            margin-bottom: 7rem;
+            width: vw;
           }
         }
 

@@ -138,7 +138,7 @@ const CheckOutPage = ({ cart, setCart, user, setShowModal, setAuthStep }) => {
               </footer>
               <footer className="time">
                 <h2>Standard</h2>
-                <p>35-40 min</p>
+                <p>45-55 min</p>
               </footer>
             </div>
           </div>
@@ -188,7 +188,7 @@ const CheckOutPage = ({ cart, setCart, user, setShowModal, setAuthStep }) => {
               onClick={handleCheckout}
               disabled={cart.length === 0}
             >
-              {user ? "Pay to order" : "Login to order"}
+              Pay to order
             </button>
             {showNetwork && <Network onClose={() => setShowNetwork(false)} />}
           </div>

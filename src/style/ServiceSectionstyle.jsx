@@ -27,14 +27,14 @@ export const Container = styled.div`
       justify-content: center;
       margin-bottom: 3rem;
       gap: 1.5rem;
-      @media screen and (max-width:768px) {
+      @media screen and (max-width: 768px) {
         height: 70vh;
-        align-items:center;
-        h2{
+        align-items: center;
+        h2 {
           font-size: 1rem;
         }
-        .cities{
-          flex-direction:column;
+        .cities {
+          flex-direction: column;
           font-size: 1.5rem;
         }
       }
@@ -82,9 +82,15 @@ export const Container = styled.div`
         .img_holder {
           width: 100%;
           height: 60vh;
-@media screen and (max-width:768px) {
-  
-}
+          @media screen and (max-width: 768px) {
+            width: 100%;
+            .img_holder {
+              height: 20vh;
+              img {
+                height: 100%;
+              }
+            }
+          }
           img {
             width: 100%;
             height: 100%;
@@ -153,7 +159,7 @@ export const Container = styled.div`
             width: max-content;
             border: none;
             border-radius: 0.5rem;
-          
+
             font-size: 1rem;
             color: white;
             cursor: pointer;
@@ -209,7 +215,7 @@ export const Container = styled.div`
           width: max-content;
           border: none;
           border-radius: 0.5rem;
-         
+
           font-size: 1rem;
           color: white;
           cursor: pointer;
@@ -254,6 +260,15 @@ export const Container = styled.div`
         .content_holder {
           width: 100%;
           height: auto;
+          .img_holder{
+            height: 45vh;
+            
+            img{
+            width: 100%;
+            height: 100%;
+            }
+          }
+
         }
 
         img {

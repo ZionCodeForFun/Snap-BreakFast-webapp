@@ -132,7 +132,6 @@ export const CartBox = styled.div`
     flex-direction: column;
     position: absolute;
     align-items: center;
-    border-top: 2px solid #cccc;
     padding-top: 1rem;
     width: 90%;
     bottom: 1rem;
