@@ -4,11 +4,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { IoClose } from "react-icons/io5";
 import { verifyEmailOTP } from "../api/auth";
-
+import { useNavigate } from "react-router";
 const VerifyEmail = ({ user, onVerified, setShowModal }) => {
   const [otp, setOtp] = useState(["", "", "", ""]);
   const inputsRef = useRef([]);
-
+  const nav = useNavigate();
   const handleChange = (e, index) => {
     const value = e.target.value;
     if (!/^\d*$/.test(value)) return;
@@ -46,6 +46,7 @@ const VerifyEmail = ({ user, onVerified, setShowModal }) => {
     } catch (error) {
       toast.error(error.response?.data?.message || "Verification failed!");
     }
+    nav("/dashboard");
     console.log("Submitting:", { email: user?.email, otp: code });
   };
 

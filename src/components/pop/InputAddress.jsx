@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import { restaurants } from "../../api/Product";
 
-const InputAddress = () => {
+const InputAddress = ({ user }) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   useEffect(() => {
@@ -25,29 +25,31 @@ const InputAddress = () => {
 
   return (
     <DeliverysessionContent>
-      <SearchContainer>
-        <IconContainer>
-          <SearchIcon />
-        </IconContainer>
-        <SearchInput
-          type="text"
-          placeholder="Search for Restaurant"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-        {results.length > 0 && (
-          <Dropdown>
-            {results.map((r, idx) => (
-              <DropdownItem
-                key={idx}
-                onClick={() => setQuery(typeof r === "string" ? r : r.name)}
-              >
-                {typeof r === "string" ? r : r.name}
-              </DropdownItem>
-            ))}
-          </Dropdown>
-        )}
-      </SearchContainer>
+      {user ? null : (
+        <SearchContainer>
+          <IconContainer>
+            <SearchIcon />
+          </IconContainer>
+          <SearchInput
+            type="text"
+            placeholder="Search for Restaurant"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          {results.length > 0 && (
+            <Dropdown>
+              {results.map((r, idx) => (
+                <DropdownItem
+                  key={idx}
+                  onClick={() => setQuery(typeof r === "string" ? r : r.name)}
+                >
+                  {typeof r === "string" ? r : r.name}
+                </DropdownItem>
+              ))}
+            </Dropdown>
+          )}
+        </SearchContainer>
+      )}
     </DeliverysessionContent>
   );
 };
@@ -63,7 +65,6 @@ export const Dropdown = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border-radius: 0.5rem;
   z-index: 100;
- 
 `;
 
 export const DropdownItem = styled.div`
@@ -89,14 +90,9 @@ export const DeliverysessionContent = styled.div`
   position: fixed;
   top: 2%;
   right: 27%;
-   @media screen  and (max-width:768px) {
+  @media screen and (max-width: 768px) {
     display: none;
-
-    
   }
-
-
-
 `;
 
 export const SearchContainer = styled.div`
@@ -106,7 +102,7 @@ export const SearchContainer = styled.div`
 export const IconContainer = styled.div`
   position: fixed;
   top: 5.7%;
-  right:43%;
+  right: 43%;
   transform: translateY(-50%);
   color: #d5d8d7;
   font-size: 23px;
@@ -127,7 +123,6 @@ export const SearchIcon = styled(IoSearchOutline)`
 `;
 
 export const SearchInput = styled.input`
- 
   height: 3rem;
   padding: 8px;
   padding-left: 47px;
@@ -139,5 +134,5 @@ export const SearchInput = styled.input`
   margin-left: 1.5rem;
   color: #8c8787b7;
   position: fixed;
-  right:27%
+  right: 27%;
 `;

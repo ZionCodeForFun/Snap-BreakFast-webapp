@@ -3,8 +3,44 @@ import styled from "styled-components";
 import { IoIosClose } from "react-icons/io";
 import kora from "../../assets/kora.jpeg";
 
-const Network = ({ onClose }) => {
+const Network = ({ onClose, user, totalAmount, onPaymentSuccess }) => {
   const [selectedMethod, setSelectedMethod] = useState(null);
+
+  const handlePayment = () => {
+    if (!selectedMethod) return;
+
+    if (selectedMethod === "kora") {
+      if (!window.Korapay) {
+        alert("KoraPay SDK not loaded. Please refresh and try again.");
+        return;
+      }
+
+      window.Korapay.initialize({
+        key: import.meta.env.VITE_KORA_Public_Key,
+        reference: `snapbreakfast_${Date.now()}`,
+        amount: Number(totalAmount),
+        currency: "NGN",
+        customer: {
+          name: user?.name || "Guest User",
+          email: user?.email || "guest@example.com",
+        },
+        onSuccess: function (data) {
+          console.log(" Payment Success:", data);
+          alert("Payment successful!");
+          if (onPaymentSuccess) onPaymentSuccess(data);
+          onClose();
+        },
+        onFailed: function (data) {
+          console.error(" Payment Failed:", data);
+          alert("Payment failed. Please try again.");
+        },
+        onPending: function (data) {
+          console.log(" Payment Pending:", data);
+          alert("Your payment is being processed...");
+        },
+      });
+    }
+  };
 
   return (
     <Overlay>
@@ -19,12 +55,11 @@ const Network = ({ onClose }) => {
           <h3>How would you like to pay?</h3>
         </Textpart>
 
-        <Option>
+        <Option onClick={() => setSelectedMethod("kora")}>
           <div className="icon">
             <img src={kora} alt="KoraPay" />
           </div>
           <article>Pay with Kora</article>
-
           <label className="radio-container">
             <input
               type="radio"
@@ -40,18 +75,15 @@ const Network = ({ onClose }) => {
         <Btnmethod>
           <button
             style={{
-              background: selectedMethod === "kora" ? "green" : "transparent",
-              color: selectedMethod === "kora" ? "white" : "black",
+              background: selectedMethod ? "green" : "transparent",
+              color: selectedMethod ? "white" : "black",
             }}
             disabled={!selectedMethod}
-            onClick={() => {
-              if (selectedMethod === "kora") {
-                window.location.href = "https://www.korahq.com/";
-              }
-            }}
+            onClick={handlePayment}
           >
-            Proceed with Kora
+            Proceed with {selectedMethod === "kora" && "Kora"}
           </button>
+
           <button className="btn" onClick={onClose}>
             Go back
           </button>
@@ -74,7 +106,7 @@ const Overlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 9999;
-  `;
+`;
 
 const Holder = styled.div`
   width: 40%;
@@ -83,9 +115,9 @@ const Holder = styled.div`
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  @media screen and (max-width:768px) {
-   width: 100%;
-   
+
+  @media screen and (max-width: 768px) {
+    width: 90%;
   }
 `;
 
@@ -136,13 +168,13 @@ const Option = styled.div`
   }
 
   .radio-container input {
-    display: none; /* hide default radio */
+    display: none;
   }
 
   .checkmark {
     width: 23px;
     height: 23px;
-    border: 2px solid green; /* green border */
+    border: 2px solid green;
     border-radius: 50%;
     display: inline-block;
     position: relative;

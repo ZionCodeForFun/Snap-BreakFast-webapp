@@ -3,9 +3,11 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const Logout = ({ onClose, setUser }) => {
+  const nav = useNavigate()
   const handleLogout = () => {
-    if (typeof setUser === "function") setUser(null);
-    if (typeof onClose === "function") onClose();
+     setUser(null);
+    onClose();
+ nav("/")
   };
   return (
     <Container>

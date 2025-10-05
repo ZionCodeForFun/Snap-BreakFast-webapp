@@ -70,7 +70,6 @@ const CheckOutPage = ({ cart, setCart, user, setShowModal, setAuthStep }) => {
               ) : (
                 cart.map((item) => (
                   <div className="food-details" key={item.id || item._id}>
-                    
                     <div className="btn_holder">
                       <button
                         onClick={() => handleDecrement(item.id || item._id)}
@@ -190,7 +189,17 @@ const CheckOutPage = ({ cart, setCart, user, setShowModal, setAuthStep }) => {
             >
               Pay to order
             </button>
-            {showNetwork && <Network onClose={() => setShowNetwork(false)} />}
+            {showNetwork && (
+              <Network
+                onClose={() => setShowNetwork(false)}
+                user={user}
+                totalAmount={grandTotal}
+                onPaymentSuccess={(data) => {
+                  console.log("✅ Payment Data:", data);
+                  // You can now send payment info to your API here
+                }}
+              />
+            )}
           </div>
         </div>
       </article>

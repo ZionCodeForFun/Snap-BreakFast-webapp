@@ -138,6 +138,7 @@ const RestaurantPage = ({ cart, setCart }) => {
       )}
 
       <Container>
+      
         <article className="wrapper">
           <h5>Restaurant / {restaurant.name}</h5>
           <div className="title_holder">

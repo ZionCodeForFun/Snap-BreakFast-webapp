@@ -57,7 +57,7 @@ const AppInner = () => {
     }
   }, [user]);
 
-  console.log("User state changed:", user);
+
 
   const setHeaderLocation = (address) => {
     setHeaderLocationRaw(address);

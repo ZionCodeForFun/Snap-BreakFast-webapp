@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+// import "react-toastify/dist/ReactToastify.css";
 import { Container } from "../style/LoginStyle";
 import { loginUser } from "../api/auth";
+import { useNavigate } from "react-router";
 
 const Login = ({ setUser, setStep, goToSignup, setShowModal }) => {
   const [email, setEmail] = useState("");
-
+  const nav = useNavigate();
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -25,21 +26,24 @@ const Login = ({ setUser, setStep, goToSignup, setShowModal }) => {
     );
     if (foundUser) {
       toast.success("Instant login successful!");
+      
+      // setStep("verify");
       setUser(foundUser);
-      setStep("verify");
-      if (typeof setShowModal === "function") setShowModal(false);
+      nav("/dashboard");
+      
+      setShowModal(false);
       return;
     }
 
-    try {
-      const data = await loginUser({ email });
-      toast.success("Login successful!");
-      setUser(data.user);
-      setStep("verify");
-      setShowModal(false);
-    } catch (error) {
-      toast.error(error.message || "Login failed!");
-    }
+    // try {
+    //   const data = await loginUser({ email });
+    //   toast.success("Login successful!");
+    //   setUser(data.user);
+    //   setStep("verify");
+    //   setShowModal(false);
+    // } catch (error) {
+    //   toast.error(error.message || "login fail");
+    // }
   };
 
   return (
